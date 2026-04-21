@@ -1,0 +1,195 @@
+@use "../abstracts/variables" as *;
+
+// Desktop sidebar
+.nav-sidebar {
+    display: none;
+
+    @media (min-width: $tablet) {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 240px;
+        height: 100vh;
+        background-color: $color-surface;
+        border-right: 1px solid $color-border;
+        padding: $space-lg;
+        z-index: 100;
+    }
+}
+
+.nav-logo {
+    margin-bottom: $space-xl;
+
+    a {
+        font-size: $font-size-lg;
+        font-weight: 600;
+        color: $color-dashboard;
+        text-decoration: none;
+    }
+}
+
+.nav-links {
+    list-style: none;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+
+    li:nth-child(1) .nav-link {
+        &:hover,
+        &--active {
+            color: $color-dashboard;
+            background-color: rgba($color-dashboard, 0.1);
+        }
+    }
+    li:nth-child(2) .nav-link {
+        &:hover,
+        &--active {
+            color: $color-chat;
+            background-color: rgba($color-chat, 0.1);
+        }
+    }
+    li:nth-child(3) .nav-link {
+        &:hover,
+        &--active {
+            color: $color-agenda;
+            background-color: rgba($color-agenda, 0.1);
+        }
+    }
+    li:nth-child(4) .nav-link {
+        &:hover,
+        &--active {
+            color: $color-notities;
+            background-color: rgba($color-notities, 0.1);
+        }
+    }
+    li:nth-child(5) .nav-link {
+        &:hover,
+        &--active {
+            color: $color-boodschappen;
+            background-color: rgba($color-boodschappen, 0.1);
+        }
+    }
+    li:nth-child(6) .nav-link {
+        &:hover,
+        &--active {
+            color: $color-fotos;
+            background-color: rgba($color-fotos, 0.1);
+        }
+    }
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    padding: $space-sm $space-md;
+    border-radius: $radius-md;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    transition: $transition;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+
+    &--logout {
+        color: $color-text-muted;
+
+        &:hover {
+            color: #e57373;
+            background-color: rgba(#e57373, 0.08);
+        }
+    }
+}
+
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.nav-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+    padding-top: $space-lg;
+    border-top: 1px solid $color-border;
+}
+
+.nav-bottom-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background-color: $color-surface;
+    border-top: 1px solid $color-border;
+    z-index: 100;
+    padding-bottom: env(safe-area-inset-bottom);
+
+    @media (min-width: $tablet) {
+        display: none;
+    }
+}
+
+.nav-bottom-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    color: $color-text-muted;
+    font-size: 10px;
+    font-weight: 500;
+    transition: $transition;
+
+    .nav-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    &:nth-child(1) {
+        &:hover {
+            color: $color-dashboard;
+        }
+    }
+    &:nth-child(2) {
+        &:hover {
+            color: $color-chat;
+        }
+    }
+    &:nth-child(3) {
+        &:hover {
+            color: $color-agenda;
+        }
+    }
+    &:nth-child(4) {
+        &:hover {
+            color: $color-boodschappen;
+        }
+    }
+    &:nth-child(5) {
+        &:hover {
+            color: $color-fotos;
+        }
+    }
+}
+
+.app-main {
+    @media (min-width: $tablet) {
+        margin-left: 240px;
+    }
+
+    padding-bottom: calc(64px + #{$space-md});
+
+    @media (min-width: $tablet) {
+        padding-bottom: $space-xl;
+    }
+}

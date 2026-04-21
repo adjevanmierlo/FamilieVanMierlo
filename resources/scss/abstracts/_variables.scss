@@ -1,10 +1,22 @@
-// Kleuren
+// Kleuren - Familie Van Mierlo palet
 $color-bg: #faf9f7;
 $color-bg-dark: #1c1c1e;
 $color-surface: #ffffff;
 $color-surface-dark: #2c2c2e;
-$color-primary: #d97b4f;
-$color-primary-dark: #e8956a;
+
+// Accent kleuren per module
+$color-dashboard: #e8956a; // Warm oranje
+$color-chat: #7cb9e8; // Zacht blauw
+$color-agenda: #82c596; // Zacht groen
+$color-notities: #f0c674; // Zacht geel
+$color-boodschappen: #c3a6e8; // Zacht paars
+$color-fotos: #e88fa0; // Zacht rood/roze
+
+// Primaire kleur (algemeen)
+$color-primary: #e8956a;
+$color-primary-dark: #f0a87d;
+
+// Tekst
 $color-text: #2d2d2d;
 $color-text-dark: #f0ede8;
 $color-text-muted: #9a9a9a;
