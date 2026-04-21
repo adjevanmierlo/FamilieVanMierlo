@@ -1,0 +1,55 @@
+@use "variables" as *;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: $font-size-base;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: $font-family;
+    background-color: $color-bg;
+    color: $color-text;
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.app-main {
+    flex: 1;
+    padding: $space-md;
+
+    @media (min-width: $tablet) {
+        padding: $space-xl;
+    }
+}
+
+a {
+    color: $color-primary;
+    text-decoration: none;
+    transition: $transition;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+// Dark mode
+body.dark {
+    background-color: $color-bg-dark;
+    color: $color-text-dark;
+}

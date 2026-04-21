@@ -1,0 +1,46 @@
+// Kleuren
+$color-bg: #faf9f7;
+$color-bg-dark: #1c1c1e;
+$color-surface: #ffffff;
+$color-surface-dark: #2c2c2e;
+$color-primary: #d97b4f;
+$color-primary-dark: #e8956a;
+$color-text: #2d2d2d;
+$color-text-dark: #f0ede8;
+$color-text-muted: #9a9a9a;
+$color-border: #edebe7;
+$color-border-dark: #3a3a3c;
+
+// Typografie
+$font-family: "Figtree", sans-serif;
+$font-size-base: 16px;
+$font-size-sm: 14px;
+$font-size-lg: 18px;
+$font-size-xl: 24px;
+
+// Spacing
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 16px;
+$space-lg: 24px;
+$space-xl: 32px;
+$space-2xl: 48px;
+
+// Radius
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 20px;
+$radius-full: 999px;
+
+// Shadows
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+$shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+// Transitions
+$transition: all 0.2s ease;
+
+// Breakpoints
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;
