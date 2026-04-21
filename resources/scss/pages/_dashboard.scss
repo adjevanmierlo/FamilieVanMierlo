@@ -1,0 +1,131 @@
+@use "../abstracts/variables" as *;
+
+.dashboard {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $space-xl;
+}
+
+.dashboard-greeting {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+}
+
+.dashboard-name {
+    font-size: $font-size-xl;
+    font-weight: 600;
+    color: $color-text;
+}
+
+.dashboard-date {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    text-transform: capitalize;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-md;
+
+    @media (min-width: $tablet) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.dashboard-card {
+    display: flex;
+    align-items: center;
+    gap: $space-md;
+    padding: $space-lg;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: $radius-lg;
+    box-shadow: $shadow-sm;
+    transition: $transition;
+    text-decoration: none;
+
+    &:hover {
+        box-shadow: $shadow-md;
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    &--chat {
+        border-left: 4px solid $color-chat;
+    }
+    &--agenda {
+        border-left: 4px solid $color-agenda;
+    }
+    &--notities {
+        border-left: 4px solid $color-notities;
+    }
+    &--boodschappen {
+        border-left: 4px solid $color-boodschappen;
+    }
+    &--fotos {
+        border-left: 4px solid $color-fotos;
+    }
+
+    &__icon {
+        width: 48px;
+        height: 48px;
+        border-radius: $radius-md;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    &__content {
+        h2 {
+            font-size: $font-size-base;
+            font-weight: 600;
+            color: $color-text;
+            margin-bottom: 2px;
+        }
+
+        p {
+            font-size: $font-size-sm;
+            color: $color-text-muted;
+        }
+    }
+
+    &--chat .dashboard-card__icon {
+        background-color: rgba($color-chat, 0.15);
+        color: $color-chat;
+    }
+
+    &--agenda .dashboard-card__icon {
+        background-color: rgba($color-agenda, 0.15);
+        color: $color-agenda;
+    }
+
+    &--notities .dashboard-card__icon {
+        background-color: rgba($color-notities, 0.15);
+        color: $color-notities;
+    }
+
+    &--boodschappen .dashboard-card__icon {
+        background-color: rgba($color-boodschappen, 0.15);
+        color: $color-boodschappen;
+    }
+
+    &--fotos .dashboard-card__icon {
+        background-color: rgba($color-fotos, 0.15);
+        color: $color-fotos;
+    }
+}
