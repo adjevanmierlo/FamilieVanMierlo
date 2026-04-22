@@ -1,8 +1,4 @@
 import "../scss/app.scss";
-import Alpine from "alpinejs";
-
-window.Alpine = Alpine;
-Alpine.start();
 
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
