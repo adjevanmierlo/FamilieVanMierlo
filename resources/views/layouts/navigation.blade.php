@@ -15,7 +15,8 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link">
+                <a href="{{ route('chat') }}"
+                    class="nav-link {{ request()->routeIs('chat') ? 'nav-link--active' : '' }}">
                     <x-heroicon-o-chat-bubble-left-right class="nav-icon" />
                     <span>Chat</span>
                 </a>
@@ -72,7 +73,8 @@
             <x-heroicon-o-home class="nav-icon" />
             <span>Dashboard</span>
         </a>
-        <a href="#" class="nav-bottom-item">
+        <a href="{{ route('chat') }}"
+            class="nav-bottom-item {{ request()->routeIs('chat') ? 'nav-bottom-item--active' : '' }}">
             <x-heroicon-o-chat-bubble-left-right class="nav-icon" />
             <span>Chat</span>
         </a>

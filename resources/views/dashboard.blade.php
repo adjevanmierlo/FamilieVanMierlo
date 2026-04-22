@@ -13,7 +13,7 @@
 
         <div class="dashboard-grid">
 
-            <a href="#" class="dashboard-card dashboard-card--chat">
+            <a href="{{ route('chat') }}" class="dashboard-card dashboard-card--chat">
                 <div class="dashboard-card__icon">
                     <x-heroicon-o-chat-bubble-left-right />
                 </div>

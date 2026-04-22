@@ -37,3 +37,8 @@ Route::get('/agenda', function () {
 Route::get('/fotos', function () {
   return view('photos.index');
 })->middleware(['auth'])->name('photos');
+
+
+Route::get('/chat', function () {
+  return view('chat.index');
+})->middleware(['auth'])->name('chat');
