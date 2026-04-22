@@ -33,3 +33,7 @@ Route::get('/notities', function () {
 Route::get('/agenda', function () {
   return view('agenda.index');
 })->middleware(['auth'])->name('agenda');
+
+Route::get('/fotos', function () {
+  return view('photos.index');
+})->middleware(['auth'])->name('photos');

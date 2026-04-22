@@ -53,7 +53,7 @@
                 </div>
             </a>
 
-            <a href="#" class="dashboard-card dashboard-card--fotos">
+            <a href="{{ route('photos') }}" class="dashboard-card dashboard-card--fotos">
                 <div class="dashboard-card__icon">
                     <x-heroicon-o-photo />
                 </div>

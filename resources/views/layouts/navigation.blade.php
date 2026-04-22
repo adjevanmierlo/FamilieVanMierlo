@@ -42,8 +42,9 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link">
-                    <x-heroicon-o-photo class="nav-icon" />
+                <a href="{{ route('photos') }}"
+                    class="nav-link {{ request()->routeIs('photos') ? 'nav-link--active' : '' }}"> <x-heroicon-o-photo
+                        class="nav-icon" />
                     <span>Foto's</span>
                 </a>
             </li>
@@ -102,7 +103,9 @@
                     </div>
                     <span>Notities</span>
                 </a>
-                <a href="#" class="nav-more-item" @click="moreOpen = false">
+                <a href="{{ route('photos') }}"
+                    class="nav-more-item {{ request()->routeIs('photos') ? 'nav-more-item--active' : '' }}"
+                    @click="moreOpen = false">
                     <div class="nav-more-item__icon nav-more-item__icon--fotos">
                         <x-heroicon-o-photo />
                     </div>

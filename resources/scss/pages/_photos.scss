@@ -1,0 +1,226 @@
+@use "../abstracts/variables" as *;
+
+.photos {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.photos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $space-xl;
+}
+
+.photos-title {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: $color-text;
+}
+
+.photos-upload {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.85) 0%,
+        rgba(255, 255, 255, 0.65) 100%
+    );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px dashed $color-fotos;
+    border-radius: $radius-lg;
+    padding: $space-xl;
+    margin-bottom: $space-xl;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-md;
+
+    &__input {
+        display: none;
+    }
+
+    &__label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: $space-sm;
+        cursor: pointer;
+        color: $color-fotos;
+        font-weight: 500;
+        font-size: $font-size-base;
+        padding: $space-lg $space-xl;
+        border-radius: $radius-md;
+        transition: $transition;
+
+        &:active {
+            background-color: rgba($color-fotos, 0.08);
+        }
+    }
+
+    &__icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    &__actions {
+        display: flex;
+        gap: $space-sm;
+    }
+}
+
+.photos-albums {
+    display: flex;
+    gap: $space-sm;
+    flex-wrap: wrap;
+    margin-bottom: $space-lg;
+}
+
+.photos-album-btn {
+    padding: $space-xs $space-md;
+    border-radius: $radius-full;
+    border: 1px solid $color-border;
+    background: none;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $color-text-muted;
+    cursor: pointer;
+    transition: $transition;
+    font-family: $font-family;
+    -webkit-tap-highlight-color: transparent;
+
+    &:active {
+        background-color: rgba($color-fotos, 0.08);
+    }
+
+    &--active {
+        background-color: rgba($color-fotos, 0.15);
+        color: $color-fotos;
+        border-color: $color-fotos;
+    }
+}
+
+.photos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-sm;
+
+    @media (min-width: $tablet) {
+        grid-template-columns: repeat(4, 1fr);
+        gap: $space-md;
+    }
+
+    @media (min-width: $desktop) {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.photos-item {
+    aspect-ratio: 1;
+    border-radius: $radius-md;
+    overflow: hidden;
+    cursor: pointer;
+    transition: $transition;
+    box-shadow: $shadow-sm;
+    -webkit-tap-highlight-color: transparent;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: $transition;
+    }
+
+    &:active {
+        transform: scale(0.97);
+        box-shadow: none;
+    }
+
+    @media (min-width: $tablet) {
+        &:hover img {
+            transform: scale(1.05);
+        }
+    }
+}
+
+.photos-empty {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-md;
+    padding: $space-2xl;
+    color: $color-text-muted;
+
+    &__icon {
+        width: 48px;
+        height: 48px;
+        color: rgba($color-fotos, 0.4);
+    }
+
+    p {
+        font-size: $font-size-sm;
+    }
+}
+
+.photos-modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $space-md;
+
+    &__content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        gap: $space-sm;
+
+        img {
+            max-width: 100%;
+            max-height: 75vh;
+            border-radius: $radius-md;
+            object-fit: contain;
+        }
+    }
+
+    &__close {
+        position: absolute;
+        top: -$space-xl;
+        right: 0;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: $space-xs;
+
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    &__info {
+        display: flex;
+        align-items: center;
+        gap: $space-md;
+        padding: $space-sm;
+    }
+
+    &__author {
+        font-size: $font-size-sm;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 600;
+    }
+
+    &__date {
+        font-size: $font-size-sm;
+        color: rgba(255, 255, 255, 0.6);
+        flex: 1;
+    }
+}
