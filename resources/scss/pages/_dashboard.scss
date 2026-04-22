@@ -52,13 +52,23 @@
     box-shadow: $shadow-sm;
     transition: $transition;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
 
-    &:hover {
-        box-shadow: $shadow-md;
-        transform: translateY(-3px);
-        background: rgba(255, 255, 255, 0.9);
+    &:active {
+        transform: scale(0.97);
+        box-shadow: none;
+        opacity: 0.85;
     }
 
+    @media (min-width: $tablet) {
+        &:hover {
+            box-shadow: $shadow-md;
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+    }
+
+    // Rest van je modifier classes blijven hetzelfde
     &--chat {
         border-left: 4px solid $color-chat;
     }
