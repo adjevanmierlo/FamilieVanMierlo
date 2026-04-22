@@ -92,58 +92,54 @@
     &--fotos {
         border-left: 4px solid $color-fotos;
     }
-}
 
-&__icon {
-    width: 48px;
-    height: 48px;
-    border-radius: $radius-md;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-
-    svg {
-        width: 24px;
-        height: 24px;
+    &--chat &__icon {
+        background-color: rgba($color-chat, 0.15);
+        color: $color-chat;
     }
-}
-
-&__content {
-    h2 {
-        font-size: $font-size-base;
-        font-weight: 600;
-        color: $color-text;
-        margin-bottom: 2px;
+    &--agenda &__icon {
+        background-color: rgba($color-agenda, 0.15);
+        color: $color-agenda;
+    }
+    &--notities &__icon {
+        background-color: rgba($color-notities, 0.15);
+        color: $color-notities;
+    }
+    &--boodschappen &__icon {
+        background-color: rgba($color-boodschappen, 0.15);
+        color: $color-boodschappen;
+    }
+    &--fotos &__icon {
+        background-color: rgba($color-fotos, 0.15);
+        color: $color-fotos;
     }
 
-    p {
-        font-size: $font-size-sm;
-        color: $color-text-muted;
+    &__icon {
+        width: 48px;
+        height: 48px;
+        border-radius: $radius-md;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        svg {
+            width: 24px;
+            height: 24px;
+        }
     }
-}
 
-&--chat .dashboard-card__icon {
-    background-color: rgba($color-chat, 0.15);
-    color: $color-chat;
-}
+    &__content {
+        h2 {
+            font-size: $font-size-base;
+            font-weight: 600;
+            color: $color-text;
+            margin-bottom: 2px;
+        }
 
-&--agenda .dashboard-card__icon {
-    background-color: rgba($color-agenda, 0.15);
-    color: $color-agenda;
-}
-
-&--notities .dashboard-card__icon {
-    background-color: rgba($color-notities, 0.15);
-    color: $color-notities;
-}
-
-&--boodschappen .dashboard-card__icon {
-    background-color: rgba($color-boodschappen, 0.15);
-    color: $color-boodschappen;
-}
-
-&--fotos .dashboard-card__icon {
-    background-color: rgba($color-fotos, 0.15);
-    color: $color-fotos;
+        p {
+            font-size: $font-size-sm;
+            color: $color-text-muted;
+        }
+    }
 }
