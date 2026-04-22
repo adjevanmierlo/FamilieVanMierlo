@@ -43,7 +43,7 @@
                 </div>
             </a>
 
-            <a href="#" class="dashboard-card dashboard-card--boodschappen">
+            <a href="{{ route('shopping') }}" class="dashboard-card dashboard-card--boodschappen">
                 <div class="dashboard-card__icon">
                     <x-heroicon-o-shopping-cart />
                 </div>

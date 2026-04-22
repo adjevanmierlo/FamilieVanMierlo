@@ -12,6 +12,9 @@ class ShoppingList extends Component
   public ShoppingListModel $list;
   public string $newItem = '';
   public string $newCategory = '';
+  public ?int $editingId = null;
+  public string $editingName = '';
+  public string $editingCategory = '';
 
   public function mount(): void
   {
@@ -52,6 +55,38 @@ class ShoppingList extends Component
   {
     ShoppingItem::findOrFail($id)->delete();
     $this->list->refresh()->load('items');
+  }
+
+  public function startEdit(int $id): void
+  {
+    $item = ShoppingItem::findOrFail($id);
+    $this->editingId = $id;
+    $this->editingName = $item->name;
+    $this->editingCategory = $item->category ?? '';
+  }
+
+  public function saveEdit(): void
+  {
+    $this->validate([
+      'editingName' => 'required|min:1|max:255',
+    ]);
+
+    ShoppingItem::findOrFail($this->editingId)->update([
+      'name'     => $this->editingName,
+      'category' => $this->editingCategory ?: null,
+    ]);
+
+    $this->editingId = null;
+    $this->editingName = '';
+    $this->editingCategory = '';
+    $this->list->refresh()->load('items');
+  }
+
+  public function cancelEdit(): void
+  {
+    $this->editingId = null;
+    $this->editingName = '';
+    $this->editingCategory = '';
   }
 
   public function render()

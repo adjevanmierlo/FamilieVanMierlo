@@ -33,7 +33,8 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link">
+                <a href="{{ route('shopping') }}"
+                    class="nav-link {{ request()->routeIs('shopping') ? 'nav-link--active' : '' }}">
                     <x-heroicon-o-shopping-cart class="nav-icon" />
                     <span>Boodschappen</span>
                 </a>
@@ -76,7 +77,8 @@
             <x-heroicon-o-calendar-days class="nav-icon" />
             <span>Agenda</span>
         </a>
-        <a href="#" class="nav-bottom-item">
+        <a href="{{ route('shopping') }}"
+            class="nav-bottom-item {{ request()->routeIs('shopping') ? 'nav-bottom-item--active' : '' }}">
             <x-heroicon-o-shopping-cart class="nav-icon" />
             <span>Boodschappen</span>
         </a>
