@@ -23,7 +23,7 @@
                 </div>
             </a>
 
-            <a href="#" class="dashboard-card dashboard-card--agenda">
+            <a href="{{ route('agenda') }}" class="dashboard-card dashboard-card--agenda">
                 <div class="dashboard-card__icon">
                     <x-heroicon-o-calendar-days />
                 </div>

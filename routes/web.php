@@ -28,3 +28,8 @@ Route::get('/boodschappen', function () {
 Route::get('/notities', function () {
   return view('notes.index');
 })->middleware(['auth'])->name('notes');
+
+
+Route::get('/agenda', function () {
+  return view('agenda.index');
+})->middleware(['auth'])->name('agenda');

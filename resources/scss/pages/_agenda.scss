@@ -1,0 +1,310 @@
+@use "../abstracts/variables" as *;
+
+.agenda {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: $space-lg;
+    align-items: start;
+
+    @media (max-width: $tablet) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.agenda-calendar {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.85) 0%,
+        rgba(255, 255, 255, 0.65) 100%
+    );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: $radius-lg;
+    box-shadow:
+        $shadow-md,
+        inset 0 1px 1px rgba(255, 255, 255, 0.9);
+    overflow: hidden;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: $space-sm;
+        padding: $space-md $space-lg;
+        border-bottom: 1px solid $color-border;
+    }
+}
+
+.agenda-month {
+    flex: 1;
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $color-text;
+    text-transform: capitalize;
+}
+
+.agenda-nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: $space-xs;
+    color: $color-text-muted;
+    display: flex;
+    align-items: center;
+    border-radius: $radius-sm;
+    transition: $transition;
+    -webkit-tap-highlight-color: transparent;
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    &:active {
+        background-color: $color-bg;
+        color: $color-agenda;
+    }
+}
+
+.agenda-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: $space-sm $space-md;
+    border-bottom: 1px solid $color-border;
+
+    span {
+        text-align: center;
+        font-size: $font-size-sm;
+        font-weight: 600;
+        color: $color-text-muted;
+    }
+}
+
+.agenda-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: $color-border;
+}
+
+.agenda-day {
+    background-color: rgba(255, 255, 255, 0.5);
+    min-height: 80px;
+    padding: $space-xs;
+    cursor: pointer;
+    transition: $transition;
+    -webkit-tap-highlight-color: transparent;
+
+    @media (max-width: $mobile) {
+        min-height: 50px;
+    }
+
+    &:active {
+        background-color: rgba($color-agenda, 0.05);
+    }
+
+    &--today {
+        background-color: rgba($color-agenda, 0.08);
+
+        .agenda-day__number {
+            background-color: $color-agenda;
+            color: white;
+            border-radius: $radius-full;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &--other {
+        opacity: 0.4;
+    }
+
+    &__number {
+        font-size: $font-size-sm;
+        font-weight: 500;
+        color: $color-text;
+        margin-bottom: 2px;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__more {
+        font-size: 10px;
+        color: $color-text-muted;
+    }
+}
+
+.agenda-event {
+    font-size: 10px;
+    font-weight: 500;
+    color: $color-text;
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.agenda-sidebar {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.85) 0%,
+        rgba(255, 255, 255, 0.65) 100%
+    );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: $radius-lg;
+    box-shadow:
+        $shadow-md,
+        inset 0 1px 1px rgba(255, 255, 255, 0.9);
+    padding: $space-lg;
+}
+
+.agenda-form {
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+
+    &__title {
+        font-size: $font-size-lg;
+        font-weight: 700;
+        color: $color-text;
+    }
+
+    &__actions {
+        display: flex;
+        gap: $space-sm;
+        justify-content: flex-end;
+    }
+}
+
+.agenda-colors {
+    display: flex;
+    gap: $space-sm;
+    flex-wrap: wrap;
+}
+
+.agenda-color {
+    width: 28px;
+    height: 28px;
+    border-radius: $radius-full;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: $transition;
+
+    &--active {
+        border-color: $color-text;
+        transform: scale(1.2);
+    }
+}
+
+.agenda-detail {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+
+    &__color {
+        width: 40px;
+        height: 4px;
+        border-radius: $radius-full;
+    }
+
+    &__title {
+        font-size: $font-size-lg;
+        font-weight: 700;
+        color: $color-text;
+    }
+
+    &__date {
+        font-size: $font-size-sm;
+        color: $color-agenda;
+        font-weight: 500;
+        text-transform: capitalize;
+    }
+
+    &__description {
+        font-size: $font-size-sm;
+        color: $color-text;
+        line-height: 1.6;
+    }
+
+    &__author {
+        font-size: $font-size-sm;
+        color: $color-text-muted;
+    }
+
+    &__actions {
+        display: flex;
+        gap: $space-sm;
+        padding-top: $space-sm;
+    }
+}
+
+.agenda-upcoming {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+
+    &__title {
+        font-size: $font-size-base;
+        font-weight: 700;
+        color: $color-text;
+        margin-bottom: $space-sm;
+    }
+}
+
+.agenda-upcoming-item {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    padding: $space-sm;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: $transition;
+    -webkit-tap-highlight-color: transparent;
+
+    &:active {
+        background-color: rgba($color-agenda, 0.08);
+    }
+
+    &__color {
+        width: 4px;
+        height: 36px;
+        border-radius: $radius-full;
+        flex-shrink: 0;
+    }
+
+    &__content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    &__title {
+        font-size: $font-size-sm;
+        font-weight: 600;
+        color: $color-text;
+    }
+
+    &__date {
+        font-size: $font-size-sm;
+        color: $color-text-muted;
+    }
+}
+
+.agenda-empty {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    text-align: center;
+    padding: $space-lg;
+}

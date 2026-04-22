@@ -21,7 +21,8 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link">
+                <a href="{{ route('agenda') }}"
+                    class="nav-link {{ request()->routeIs('agenda') ? 'nav-link--active' : '' }}">
                     <x-heroicon-o-calendar-days class="nav-icon" />
                     <span>Agenda</span>
                 </a>
@@ -74,7 +75,8 @@
             <x-heroicon-o-chat-bubble-left-right class="nav-icon" />
             <span>Chat</span>
         </a>
-        <a href="#" class="nav-bottom-item">
+        <a href="{{ route('agenda') }}"
+            class="nav-bottom-item {{ request()->routeIs('agenda') ? 'nav-bottom-item--active' : '' }}">
             <x-heroicon-o-calendar-days class="nav-icon" />
             <span>Agenda</span>
         </a>
