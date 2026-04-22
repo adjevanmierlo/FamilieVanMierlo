@@ -44,15 +44,23 @@
             </li>
             <li>
                 <a href="{{ route('photos') }}"
-                    class="nav-link {{ request()->routeIs('photos') ? 'nav-link--active' : '' }}"> <x-heroicon-o-photo
-                        class="nav-icon" />
+                    class="nav-link {{ request()->routeIs('photos') ? 'nav-link--active' : '' }}">
+                    <x-heroicon-o-photo class="nav-icon" />
                     <span>Foto's</span>
                 </a>
             </li>
         </ul>
 
         <div class="nav-bottom">
-            <a href="{{ route('profile.edit') }}" class="nav-link">
+            @if (Auth::user()->role === 'admin')
+                <a href="{{ route('admin.users') }}"
+                    class="nav-link {{ request()->routeIs('admin.users') ? 'nav-link--active' : '' }}">
+                    <x-heroicon-o-users class="nav-icon" />
+                    <span>Gebruikers</span>
+                </a>
+            @endif
+            <a href="{{ route('settings') }}"
+                class="nav-link {{ request()->routeIs('settings') ? 'nav-link--active' : '' }}">
                 <x-heroicon-o-cog-6-tooth class="nav-icon" />
                 <span>Instellingen</span>
             </a>
@@ -113,12 +121,24 @@
                     </div>
                     <span>Foto's</span>
                 </a>
-                <a href="{{ route('profile.edit') }}" class="nav-more-item" @click="moreOpen = false">
+                <a href="{{ route('settings') }}"
+                    class="nav-more-item {{ request()->routeIs('settings') ? 'nav-more-item--active' : '' }}"
+                    @click="moreOpen = false">
                     <div class="nav-more-item__icon nav-more-item__icon--instellingen">
                         <x-heroicon-o-cog-6-tooth />
                     </div>
                     <span>Instellingen</span>
                 </a>
+                @if (Auth::user()->role === 'admin')
+                    <a href="{{ route('admin.users') }}"
+                        class="nav-more-item {{ request()->routeIs('admin.users') ? 'nav-more-item--active' : '' }}"
+                        @click="moreOpen = false">
+                        <div class="nav-more-item__icon nav-more-item__icon--admin">
+                            <x-heroicon-o-users />
+                        </div>
+                        <span>Gebruikers</span>
+                    </a>
+                @endif
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="nav-more-item nav-more-item--logout">

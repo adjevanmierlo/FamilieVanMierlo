@@ -42,3 +42,16 @@ Route::get('/fotos', function () {
 Route::get('/chat', function () {
   return view('chat.index');
 })->middleware(['auth'])->name('chat');
+
+
+Route::get('/instellingen', function () {
+  return view('settings.index');
+})->middleware(['auth'])->name('settings');
+
+
+Route::get('/admin/gebruikers', function () {
+  if (auth()->user()->role !== 'admin') {
+    abort(403);
+  }
+  return view('admin.users');
+})->middleware(['auth'])->name('admin.users');

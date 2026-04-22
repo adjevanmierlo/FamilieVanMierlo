@@ -241,6 +241,11 @@
     transition: $transition;
     width: 100%;
 
+    &--admin {
+        background-color: rgba($color-agenda, 0.15);
+        color: $color-agenda;
+    }
+
     &:active {
         background-color: $color-bg;
     }

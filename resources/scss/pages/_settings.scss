@@ -1,0 +1,153 @@
+@use "../abstracts/variables" as *;
+
+.settings {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.settings-header {
+    margin-bottom: $space-xl;
+}
+
+.settings-title {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: $color-text;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-lg;
+
+    @media (max-width: $tablet) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.settings-card {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.85) 0%,
+        rgba(255, 255, 255, 0.65) 100%
+    );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: $radius-lg;
+    box-shadow:
+        $shadow-md,
+        inset 0 1px 1px rgba(255, 255, 255, 0.9);
+    padding: $space-xl;
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+
+    &__title {
+        font-size: $font-size-lg;
+        font-weight: 700;
+        color: $color-text;
+        margin-bottom: $space-sm;
+    }
+}
+
+.settings-avatar {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-bottom: $space-sm;
+
+    &__img {
+        width: 80px;
+        height: 80px;
+        border-radius: $radius-full;
+        object-fit: cover;
+    }
+
+    &__placeholder {
+        width: 80px;
+        height: 80px;
+        border-radius: $radius-full;
+        background-color: rgba($color-dashboard, 0.15);
+        color: $color-dashboard;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: $font-size-xl;
+        font-weight: 700;
+    }
+
+    &__upload {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 28px;
+        height: 28px;
+        border-radius: $radius-full;
+        background-color: $color-dashboard;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+
+        input {
+            display: none;
+        }
+    }
+
+    &__icon {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.settings-success {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+    color: $color-agenda;
+    font-size: $font-size-sm;
+    font-weight: 500;
+
+    svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.settings-theme {
+    display: flex;
+    gap: $space-md;
+
+    &__option {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: $space-sm;
+        padding: $space-lg;
+        border-radius: $radius-md;
+        border: 2px solid $color-border;
+        cursor: pointer;
+        transition: $transition;
+        color: $color-text-muted;
+        -webkit-tap-highlight-color: transparent;
+
+        &--active {
+            border-color: $color-dashboard;
+            color: $color-dashboard;
+            background-color: rgba($color-dashboard, 0.05);
+        }
+
+        &:active {
+            opacity: 0.8;
+        }
+    }
+
+    &__icon {
+        width: 28px;
+        height: 28px;
+    }
+}
