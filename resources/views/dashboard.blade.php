@@ -33,7 +33,7 @@
                 </div>
             </a>
 
-            <a href="#" class="dashboard-card dashboard-card--notities">
+            <a href="{{ route('notes') }}" class="dashboard-card dashboard-card--notities">
                 <div class="dashboard-card__icon">
                     <x-heroicon-o-document-text />
                 </div>

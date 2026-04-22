@@ -128,6 +128,7 @@
     border-top: 1px solid $color-border;
 }
 
+// Mobile bottom navigation
 .nav-bottom-bar {
     display: flex;
     position: fixed;
@@ -135,7 +136,13 @@
     left: 0;
     right: 0;
     height: 64px;
-    background-color: $color-surface;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 255, 255, 0.85) 100%
+    );
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-top: 1px solid $color-border;
     z-index: 100;
     padding-bottom: env(safe-area-inset-bottom);
@@ -156,39 +163,128 @@
     font-size: 10px;
     font-weight: 500;
     transition: $transition;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: $font-family;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
 
     .nav-icon {
         width: 24px;
         height: 24px;
     }
 
-    &:nth-child(1) {
-        &:hover {
-            color: $color-dashboard;
-        }
+    &--active {
+        color: $color-primary;
     }
-    &:nth-child(2) {
-        &:hover {
-            color: $color-chat;
-        }
+
+    &:active {
+        opacity: 0.7;
     }
-    &:nth-child(3) {
-        &:hover {
-            color: $color-agenda;
-        }
+}
+
+// Meer menu sheet
+.nav-more-sheet {
+    position: fixed;
+    bottom: 64px;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 255, 255, 0.85) 100%
+    );
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid $color-border;
+    border-radius: $radius-lg $radius-lg 0 0;
+    box-shadow: $shadow-lg;
+    padding: $space-md;
+    z-index: 99;
+
+    @media (min-width: $tablet) {
+        display: none;
     }
-    &:nth-child(4) {
-        &:hover {
-            color: $color-boodschappen;
-        }
+
+    &__handle {
+        width: 40px;
+        height: 4px;
+        background-color: $color-border;
+        border-radius: $radius-full;
+        margin: 0 auto $space-md;
     }
-    &:nth-child(5) {
-        &:hover {
+}
+
+.nav-more-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-sm;
+}
+
+.nav-more-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $space-xs;
+    font-size: 11px;
+    font-weight: 500;
+    color: $color-text-muted;
+    background: none;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    font-family: $font-family;
+    text-decoration: none;
+    padding: $space-sm;
+    border-radius: $radius-md;
+    transition: $transition;
+    width: 100%;
+
+    &:active {
+        background-color: $color-bg;
+    }
+
+    &--active {
+        color: $color-notities;
+    }
+
+    &__icon {
+        width: 48px;
+        height: 48px;
+        border-radius: $radius-md;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        &--notities {
+            background-color: rgba($color-notities, 0.15);
+            color: $color-notities;
+        }
+
+        &--fotos {
+            background-color: rgba($color-fotos, 0.15);
             color: $color-fotos;
+        }
+
+        &--instellingen {
+            background-color: rgba($color-text-muted, 0.15);
+            color: $color-text-muted;
+        }
+
+        &--logout {
+            background-color: rgba(#e57373, 0.15);
+            color: #e57373;
         }
     }
 }
 
+// App main offset
 .app-main {
     @media (min-width: $tablet) {
         margin-left: 240px;

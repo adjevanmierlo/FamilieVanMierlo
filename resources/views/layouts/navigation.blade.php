@@ -27,7 +27,8 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link">
+                <a href="{{ route('notes') }}"
+                    class="nav-link {{ request()->routeIs('notes') ? 'nav-link--active' : '' }}">
                     <x-heroicon-o-document-text class="nav-icon" />
                     <span>Notities</span>
                 </a>
@@ -63,7 +64,7 @@
     </aside>
 
     {{-- Mobile bottom navigation --}}
-    <nav class="nav-bottom-bar">
+    <nav class="nav-bottom-bar" x-data="{ moreOpen: false }">
         <a href="{{ route('dashboard') }}"
             class="nav-bottom-item {{ request()->routeIs('dashboard') ? 'nav-bottom-item--active' : '' }}">
             <x-heroicon-o-home class="nav-icon" />
@@ -82,10 +83,46 @@
             <x-heroicon-o-shopping-cart class="nav-icon" />
             <span>Boodschappen</span>
         </a>
-        <a href="#" class="nav-bottom-item">
-            <x-heroicon-o-photo class="nav-icon" />
-            <span>Foto's</span>
-        </a>
+        <button class="nav-bottom-item" @click="moreOpen = !moreOpen">
+            <x-heroicon-o-squares-2x2 class="nav-icon" />
+            <span>Meer</span>
+        </button>
+
+        {{-- Meer menu sheet --}}
+        <div class="nav-more-sheet" x-show="moreOpen" @click.outside="moreOpen = false" x-transition>
+            <div class="nav-more-sheet__handle"></div>
+            <div class="nav-more-grid">
+                <a href="{{ route('notes') }}"
+                    class="nav-more-item {{ request()->routeIs('notes') ? 'nav-more-item--active' : '' }}"
+                    @click="moreOpen = false">
+                    <div class="nav-more-item__icon nav-more-item__icon--notities">
+                        <x-heroicon-o-document-text />
+                    </div>
+                    <span>Notities</span>
+                </a>
+                <a href="#" class="nav-more-item" @click="moreOpen = false">
+                    <div class="nav-more-item__icon nav-more-item__icon--fotos">
+                        <x-heroicon-o-photo />
+                    </div>
+                    <span>Foto's</span>
+                </a>
+                <a href="{{ route('profile.edit') }}" class="nav-more-item" @click="moreOpen = false">
+                    <div class="nav-more-item__icon nav-more-item__icon--instellingen">
+                        <x-heroicon-o-cog-6-tooth />
+                    </div>
+                    <span>Instellingen</span>
+                </a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="nav-more-item nav-more-item--logout">
+                        <div class="nav-more-item__icon nav-more-item__icon--logout">
+                            <x-heroicon-o-arrow-right-on-rectangle />
+                        </div>
+                        <span>Uitloggen</span>
+                    </button>
+                </form>
+            </div>
+        </div>
     </nav>
 
 </nav>

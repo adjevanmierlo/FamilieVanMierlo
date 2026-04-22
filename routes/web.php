@@ -23,3 +23,8 @@ require __DIR__ . '/auth.php';
 Route::get('/boodschappen', function () {
   return view('shopping.index');
 })->middleware(['auth'])->name('shopping');
+
+
+Route::get('/notities', function () {
+  return view('notes.index');
+})->middleware(['auth'])->name('notes');
