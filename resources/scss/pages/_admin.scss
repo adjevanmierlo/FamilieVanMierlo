@@ -160,4 +160,35 @@
         font-size: $font-size-sm;
         color: $color-text-muted;
     }
+
+    // New edit styles
+    &__edit {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: $space-sm;
+    }
+
+    &__edit-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: $color-text-muted;
+        display: flex;
+        align-items: center;
+        padding: $space-xs;
+        border-radius: $radius-sm;
+        transition: $transition;
+        -webkit-tap-highlight-color: transparent;
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        &:hover {
+            color: $color-agenda;
+            background-color: rgba($color-agenda, 0.1);
+        }
+    }
 }

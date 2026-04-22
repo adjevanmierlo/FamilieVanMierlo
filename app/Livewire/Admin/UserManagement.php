@@ -18,6 +18,13 @@ class UserManagement extends Component
   public bool $adding = false;
   public ?int $deletingId = null;
 
+  // Edit properties
+  public ?int $editingId = null;
+  public string $editName = '';
+  public string $editEmail = '';
+  public string $editPassword = '';
+  public string $editRole = 'lid';
+
   public function addUser(): void
   {
     $this->validate([
@@ -50,6 +57,47 @@ class UserManagement extends Component
 
     User::findOrFail($id)->delete();
     $this->deletingId = null;
+  }
+
+  public function startEdit(int $id): void
+  {
+    $user = User::findOrFail($id);
+    $this->editingId  = $id;
+    $this->editName   = $user->name;
+    $this->editEmail  = $user->email;
+    $this->editPassword = '';
+    $this->editRole   = $user->role;
+  }
+
+  public function saveEdit(): void
+  {
+    $this->validate([
+      'editName'     => 'required|min:2|max:255',
+      'editEmail'    => 'required|email|unique:users,email,' . $this->editingId,
+      'editPassword' => 'nullable|min:8',
+      'editRole'     => 'required|in:admin,lid',
+    ]);
+
+    $user = User::findOrFail($this->editingId);
+
+    $data = [
+      'name'  => $this->editName,
+      'email' => $this->editEmail,
+      'role'  => $this->editRole,
+    ];
+
+    if (!empty($this->editPassword)) {
+      $data['password'] = Hash::make($this->editPassword);
+    }
+
+    $user->update($data);
+
+    $this->editingId = null;
+  }
+
+  public function cancelEdit(): void
+  {
+    $this->editingId = null;
   }
 
   public function render()
