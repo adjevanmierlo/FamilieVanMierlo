@@ -15,7 +15,7 @@
 .admin-title {
     font-size: $font-size-xl;
     font-weight: 700;
-    color: $color-text;
+    color: var(--color-text);
 }
 
 .admin-form {
@@ -40,7 +40,7 @@
     &__title {
         font-size: $font-size-lg;
         font-weight: 700;
-        color: $color-text;
+        color: var(--color-text);
     }
 
     &__actions {
@@ -48,6 +48,15 @@
         gap: $space-sm;
         justify-content: flex-end;
     }
+}
+
+html.dark .admin-form {
+    background: linear-gradient(
+        135deg,
+        rgba(44, 44, 46, 0.85) 0%,
+        rgba(44, 44, 46, 0.65) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
 .admin-users {
@@ -105,12 +114,12 @@
     &__name {
         font-size: $font-size-base;
         font-weight: 600;
-        color: $color-text;
+        color: var(--color-text);
     }
 
     &__email {
         font-size: $font-size-sm;
-        color: $color-text-muted;
+        color: var(--color-text-muted);
     }
 
     &__role {
@@ -130,11 +139,41 @@
         }
     }
 
+    &__edit {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: $space-sm;
+    }
+
+    &__edit-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--color-text-muted);
+        display: flex;
+        align-items: center;
+        padding: $space-xs;
+        border-radius: $radius-sm;
+        transition: $transition;
+        -webkit-tap-highlight-color: transparent;
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        &:hover {
+            color: $color-agenda;
+            background-color: rgba($color-agenda, 0.1);
+        }
+    }
+
     &__delete {
         background: none;
         border: none;
         cursor: pointer;
-        color: $color-text-muted;
+        color: var(--color-text-muted);
         display: flex;
         align-items: center;
         padding: $space-xs;
@@ -158,37 +197,15 @@
         align-items: center;
         gap: $space-sm;
         font-size: $font-size-sm;
-        color: $color-text-muted;
+        color: var(--color-text-muted);
     }
+}
 
-    // New edit styles
-    &__edit {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: $space-sm;
-    }
-
-    &__edit-btn {
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: $color-text-muted;
-        display: flex;
-        align-items: center;
-        padding: $space-xs;
-        border-radius: $radius-sm;
-        transition: $transition;
-        -webkit-tap-highlight-color: transparent;
-
-        svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        &:hover {
-            color: $color-agenda;
-            background-color: rgba($color-agenda, 0.1);
-        }
-    }
+html.dark .admin-user {
+    background: linear-gradient(
+        135deg,
+        rgba(44, 44, 46, 0.85) 0%,
+        rgba(44, 44, 46, 0.65) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.08);
 }

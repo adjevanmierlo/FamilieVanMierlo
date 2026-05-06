@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ darkMode: false }" :class="{ 'dark': darkMode }">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data x-init="const theme = localStorage.getItem('theme');
+if (theme === 'dark') document.documentElement.classList.add('dark');">
 
 <head>
     <meta charset="utf-8">

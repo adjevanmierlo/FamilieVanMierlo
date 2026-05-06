@@ -56,13 +56,22 @@
     &__title {
         font-size: $font-size-base;
         font-weight: 700;
-        color: $color-text;
+        color: var(--color-text);
     }
 
     &__subtitle {
         font-size: $font-size-sm;
-        color: $color-text-muted;
+        color: var(--color-text-muted);
     }
+}
+
+html.dark .chat-header {
+    background: linear-gradient(
+        135deg,
+        rgba(44, 44, 46, 0.85) 0%,
+        rgba(44, 44, 46, 0.65) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
 .chat-messages {
@@ -82,6 +91,15 @@
     border: 1px solid rgba(255, 255, 255, 0.9);
     border-radius: $radius-lg;
     margin-bottom: $space-md;
+}
+
+html.dark .chat-messages {
+    background: linear-gradient(
+        135deg,
+        rgba(44, 44, 46, 0.6) 0%,
+        rgba(44, 44, 46, 0.4) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
 .chat-message {
@@ -107,7 +125,6 @@
         .chat-message__meta {
             justify-content: flex-end;
         }
-
         .chat-message__name {
             display: none;
         }
@@ -143,7 +160,7 @@
 
     &__name {
         font-size: 11px;
-        color: $color-text-muted;
+        color: var(--color-text-muted);
         font-weight: 600;
         padding-left: $space-sm;
         margin-bottom: 2px;
@@ -168,11 +185,11 @@
             display: flex;
             align-items: center;
             gap: $space-xs;
-            color: $color-text-muted;
+            color: var(--color-text-muted);
             font-style: italic;
             font-size: $font-size-sm;
             background: rgba(0, 0, 0, 0.04);
-            border: 1px dashed $color-border;
+            border: 1px dashed var(--color-border);
             padding: $space-sm $space-md;
             border-radius: $radius-lg;
             box-shadow: none;
@@ -200,12 +217,12 @@
 
     &__time {
         font-size: 10px;
-        color: $color-text-muted;
+        color: var(--color-text-muted);
     }
 
     &__edited {
         font-size: 10px;
-        color: $color-text-muted;
+        color: var(--color-text-muted);
         font-style: italic;
     }
 
@@ -225,7 +242,7 @@
         background: none;
         border: none;
         cursor: pointer;
-        color: $color-text-muted;
+        color: var(--color-text-muted);
         padding: 2px;
         display: flex;
         border-radius: $radius-sm;
@@ -242,11 +259,9 @@
             background-color: rgba($color-chat, 0.1);
         }
 
-        &--delete {
-            &:hover {
-                color: #e57373;
-                background-color: rgba(#e57373, 0.1);
-            }
+        &--delete:hover {
+            color: #e57373;
+            background-color: rgba(#e57373, 0.1);
         }
     }
 
@@ -264,8 +279,8 @@
         font-family: $font-family;
         font-size: $font-size-base;
         outline: none;
-        background: white;
-        color: $color-text;
+        background: var(--color-surface);
+        color: var(--color-text);
     }
 
     &__edit-actions {
@@ -274,12 +289,22 @@
     }
 }
 
+html.dark .chat-message__bubble:not(.chat-message__bubble--deleted) {
+    background: linear-gradient(
+        135deg,
+        rgba(58, 58, 60, 0.95) 0%,
+        rgba(58, 58, 60, 0.85) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.08);
+    color: var(--color-text);
+}
+
 .chat-empty {
     display: flex;
     align-items: center;
     justify-content: center;
     flex: 1;
-    color: $color-text-muted;
+    color: var(--color-text-muted);
     font-size: $font-size-sm;
 }
 
@@ -331,7 +356,7 @@
 
     &__attach {
         cursor: pointer;
-        color: $color-text-muted;
+        color: var(--color-text-muted);
         display: flex;
         align-items: center;
         -webkit-tap-highlight-color: transparent;
@@ -340,11 +365,9 @@
             width: 22px;
             height: 22px;
         }
-
         &:active {
             color: $color-chat;
         }
-
         input {
             display: none;
         }
@@ -357,11 +380,11 @@
         background: none;
         font-family: $font-family;
         font-size: $font-size-base;
-        color: $color-text;
+        color: var(--color-text);
         padding: $space-sm 0;
 
         &::placeholder {
-            color: $color-text-muted;
+            color: var(--color-text-muted);
         }
     }
 
@@ -384,10 +407,18 @@
             width: 18px;
             height: 18px;
         }
-
         &:active {
             opacity: 0.8;
             transform: scale(0.95);
         }
     }
+}
+
+html.dark .chat-input {
+    background: linear-gradient(
+        135deg,
+        rgba(44, 44, 46, 0.85) 0%,
+        rgba(44, 44, 46, 0.65) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.08);
 }

@@ -34,14 +34,23 @@
         align-items: center;
         justify-content: space-between;
         padding: $space-md;
-        border-bottom: 1px solid $color-border;
+        border-bottom: 1px solid var(--color-border);
     }
+}
+
+html.dark .notes-sidebar {
+    background: linear-gradient(
+        135deg,
+        rgba(44, 44, 46, 0.85) 0%,
+        rgba(44, 44, 46, 0.65) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
 .notes-title {
     font-size: $font-size-lg;
     font-weight: 700;
-    color: $color-text;
+    color: var(--color-text);
 }
 
 .notes-list {
@@ -77,7 +86,7 @@
     &__title {
         font-size: $font-size-sm;
         font-weight: 600;
-        color: $color-text;
+        color: var(--color-text);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -92,7 +101,7 @@
 
     &__date {
         font-size: 11px;
-        color: $color-text-muted;
+        color: var(--color-text-muted);
         margin-top: 2px;
         display: block;
     }
@@ -100,7 +109,7 @@
 
 .notes-empty {
     text-align: center;
-    color: $color-text-muted;
+    color: var(--color-text-muted);
     font-size: $font-size-sm;
     padding: $space-xl;
 }
@@ -123,6 +132,15 @@
     flex-direction: column;
 }
 
+html.dark .notes-content {
+    background: linear-gradient(
+        135deg,
+        rgba(44, 44, 46, 0.85) 0%,
+        rgba(44, 44, 46, 0.65) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
 .notes-editor {
     display: flex;
     flex-direction: column;
@@ -133,7 +151,7 @@
     &__title {
         font-size: $font-size-xl;
         font-weight: 700;
-        color: $color-text;
+        color: var(--color-text);
         border: none;
         outline: none;
         background: none;
@@ -150,7 +168,7 @@
         background: none;
         font-family: $font-family;
         font-size: $font-size-base;
-        color: $color-text;
+        color: var(--color-text);
         resize: none;
         line-height: 1.8;
     }
@@ -160,7 +178,7 @@
         align-items: center;
         justify-content: space-between;
         padding-top: $space-md;
-        border-top: 1px solid $color-border;
+        border-top: 1px solid var(--color-border);
     }
 
     &__actions {
@@ -184,7 +202,7 @@
     &__title {
         font-size: $font-size-xl;
         font-weight: 700;
-        color: $color-text;
+        color: var(--color-text);
     }
 
     &__actions {
@@ -196,15 +214,15 @@
         display: flex;
         gap: $space-md;
         font-size: $font-size-sm;
-        color: $color-text-muted;
+        color: var(--color-text-muted);
         margin-bottom: $space-lg;
         padding-bottom: $space-md;
-        border-bottom: 1px solid $color-border;
+        border-bottom: 1px solid var(--color-border);
     }
 
     &__content {
         font-size: $font-size-base;
-        color: $color-text;
+        color: var(--color-text);
         line-height: 1.8;
         white-space: pre-wrap;
         word-break: break-word;
@@ -218,7 +236,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    color: $color-text-muted;
+    color: var(--color-text-muted);
     gap: $space-md;
 
     &__icon {

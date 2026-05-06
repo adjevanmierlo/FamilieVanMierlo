@@ -1,4 +1,6 @@
 @use "../abstracts/variables" as *;
+@use "sass:color";
+
 *,
 *::before,
 *::after {
@@ -14,11 +16,14 @@ html {
 
 body {
     font-family: $font-family;
-    background-color: $color-bg;
-    color: $color-text;
+    background-color: var(--color-bg);
+    color: var(--color-text);
     line-height: 1.6;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
 }
 
 .app-wrapper {
@@ -47,8 +52,111 @@ img {
     display: block;
 }
 
-// Dark mode
-body.dark {
-    background-color: $color-bg-dark;
-    color: $color-text-dark;
+.form-input {
+    width: 100%;
+    padding: $space-sm $space-md;
+    border: 1px solid var(--color-border);
+    border-radius: $radius-md;
+    font-size: $font-size-base;
+    font-family: $font-family;
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    transition: $transition;
+    outline: none;
+
+    &:focus {
+        border-color: $color-dashboard;
+        box-shadow: 0 0 0 3px rgba($color-dashboard, 0.1);
+    }
+
+    &--error {
+        border-color: #e57373;
+    }
+}
+
+.form-label {
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: var(--color-text);
+    display: block;
+    margin-bottom: $space-xs;
+}
+
+.form-error {
+    font-size: $font-size-sm;
+    color: #e57373;
+    display: block;
+    margin-top: 2px;
+}
+
+.form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+    font-size: $font-size-sm;
+    color: var(--color-text-muted);
+    cursor: pointer;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-xs;
+    padding: $space-sm $space-lg;
+    border-radius: $radius-md;
+    font-size: $font-size-base;
+    font-weight: 600;
+    font-family: $font-family;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: $transition;
+    -webkit-tap-highlight-color: transparent;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+
+    &--primary {
+        background-color: $color-dashboard;
+        color: white;
+        border-color: $color-dashboard;
+
+        &:active {
+            opacity: 0.85;
+            transform: scale(0.98);
+        }
+
+        @media (min-width: $tablet) {
+            &:hover {
+                background-color: color.adjust(
+                    $color-dashboard,
+                    $lightness: -8%
+                );
+            }
+        }
+    }
+
+    &--full {
+        width: 100%;
+    }
+
+    &--sm {
+        padding: $space-xs $space-sm;
+        font-size: $font-size-sm;
+    }
+
+    &--danger {
+        color: #e57373;
+        border-color: transparent;
+        background: none;
+
+        &:hover {
+            background-color: rgba(#e57373, 0.1);
+        }
+    }
 }

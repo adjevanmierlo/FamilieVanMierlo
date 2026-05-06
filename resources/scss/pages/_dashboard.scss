@@ -14,36 +14,38 @@
 
 .dashboard-greeting {
     font-size: $font-size-sm;
-    color: $color-text-muted;
+    color: var(--color-text-muted);
 }
 
 .dashboard-name {
     font-size: $font-size-xl;
     font-weight: 600;
-    color: $color-text;
+    color: var(--color-text);
 }
 
 .dashboard-date {
     font-size: $font-size-sm;
-    color: $color-text-muted;
+    color: var(--color-text-muted);
     text-transform: capitalize;
 }
 
 .dashboard-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: $space-md;
+    gap: $space-sm;
 
     @media (min-width: $tablet) {
         grid-template-columns: repeat(3, 1fr);
+        gap: $space-md;
     }
 }
 
 .dashboard-card {
     display: flex;
     align-items: center;
-    gap: $space-md;
-    padding: $space-lg;
+    gap: $space-sm;
+    padding: $space-sm;
+    min-height: 80px;
     background: linear-gradient(
         135deg,
         rgba(255, 255, 255, 0.85) 0%,
@@ -52,8 +54,6 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.9);
-    border-top: 1px solid rgba(255, 255, 255, 1);
-    border-left: 1px solid rgba(255, 255, 255, 1);
     border-radius: $radius-lg;
     box-shadow:
         $shadow-md,
@@ -61,6 +61,15 @@
     transition: $transition;
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
+    min-width: 0;
+
+    @media (min-width: $tablet) {
+        display: flex;
+        align-items: center;
+        gap: $space-sm;
+        padding: $space-sm;
+        min-height: 80px;
+    }
 
     &:active {
         transform: scale(0.97);
@@ -115,8 +124,8 @@
     }
 
     &__icon {
-        width: 48px;
-        height: 48px;
+        width: 36px;
+        height: 36px;
         border-radius: $radius-md;
         display: flex;
         align-items: center;
@@ -124,22 +133,52 @@
         flex-shrink: 0;
 
         svg {
-            width: 24px;
-            height: 24px;
+            width: 18px;
+            height: 18px;
+        }
+
+        @media (min-width: $tablet) {
+            width: 48px;
+            height: 48px;
+
+            svg {
+                width: 24px;
+                height: 24px;
+            }
         }
     }
 
     &__content {
+        min-width: 0;
+
         h2 {
-            font-size: $font-size-base;
+            font-size: $font-size-sm;
             font-weight: 600;
-            color: $color-text;
+            color: var(--color-text);
             margin-bottom: 2px;
+
+            @media (min-width: $tablet) {
+                font-size: $font-size-base;
+            }
         }
 
         p {
-            font-size: $font-size-sm;
-            color: $color-text-muted;
+            font-size: 11px;
+            color: var(--color-text-muted);
+            line-height: 1.3;
+
+            @media (min-width: $tablet) {
+                font-size: $font-size-sm;
+            }
         }
     }
+}
+
+html.dark .dashboard-card {
+    background: linear-gradient(
+        135deg,
+        rgba(44, 44, 46, 0.85) 0%,
+        rgba(44, 44, 46, 0.65) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.08);
 }

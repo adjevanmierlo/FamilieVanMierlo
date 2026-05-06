@@ -1,4 +1,5 @@
 @use "../abstracts/variables" as *;
+@use "sass:color";
 
 .auth-wrapper {
     min-height: 100vh;
@@ -6,7 +7,7 @@
     align-items: center;
     justify-content: center;
     padding: $space-md;
-    background-color: $color-bg;
+    background-color: var(--color-bg);
 }
 
 .auth-card {
@@ -36,7 +37,7 @@
     a {
         font-size: $font-size-lg;
         font-weight: 700;
-        color: $color-dashboard;
+        color: $color-primary;
         text-decoration: none;
     }
 }
@@ -44,14 +45,14 @@
 .auth-title {
     font-size: $font-size-xl;
     font-weight: 700;
-    color: $color-text;
+    color: var(--color-text);
     text-align: center;
     margin-bottom: $space-xs;
 }
 
 .auth-subtitle {
     font-size: $font-size-sm;
-    color: $color-text-muted;
+    color: var(--color-text-muted);
     text-align: center;
     margin-bottom: $space-xl;
 }
@@ -61,7 +62,7 @@
     padding: $space-sm $space-md;
     border-radius: $radius-sm;
     background-color: rgba($color-agenda, 0.15);
-    color: $color-text;
+    color: var(--color-text);
     font-size: $font-size-sm;
 }
 
@@ -71,96 +72,13 @@
     gap: $space-md;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: $space-xs;
-}
-
-.form-label {
-    font-size: $font-size-sm;
-    font-weight: 500;
-    color: $color-text;
-}
-
-.form-input {
-    width: 100%;
-    padding: $space-sm $space-md;
-    border: 1px solid $color-border;
-    border-radius: $radius-md;
-    font-size: $font-size-base;
-    font-family: $font-family;
-    color: $color-text;
-    background-color: rgba(255, 255, 255, 0.8);
-    transition: $transition;
-    outline: none;
-
-    &:focus {
-        border-color: $color-dashboard;
-        box-shadow: 0 0 0 3px rgba($color-dashboard, 0.1);
-    }
-
-    &--error {
-        border-color: #e57373;
-    }
-}
-
-.form-error {
-    font-size: $font-size-sm;
-    color: #e57373;
-}
-
 .form-remember {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.form-checkbox {
-    display: flex;
-    align-items: center;
-    gap: $space-xs;
-    font-size: $font-size-sm;
-    color: $color-text-muted;
-    cursor: pointer;
-}
-
 .form-link {
     font-size: $font-size-sm;
-    color: $color-dashboard;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: $space-sm $space-lg;
-    border-radius: $radius-md;
-    font-size: $font-size-base;
-    font-weight: 600;
-    font-family: $font-family;
-    border: none;
-    cursor: pointer;
-    transition: $transition;
-    -webkit-tap-highlight-color: transparent;
-
-    &--primary {
-        background-color: $color-dashboard;
-        color: white;
-
-        &:active {
-            opacity: 0.85;
-            transform: scale(0.98);
-        }
-
-        @media (min-width: $tablet) {
-            &:hover {
-                background-color: darken($color-dashboard, 8%);
-            }
-        }
-    }
-
-    &--full {
-        width: 100%;
-    }
+    color: $color-primary;
 }

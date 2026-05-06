@@ -5,12 +5,12 @@ $color-surface: #ffffff;
 $color-surface-dark: #2c2c2e;
 
 // Accent kleuren per module
-$color-dashboard: #e8956a; // Warm oranje
-$color-chat: #7cb9e8; // Zacht blauw
-$color-agenda: #82c596; // Zacht groen
-$color-notities: #f0c674; // Zacht geel
-$color-boodschappen: #c3a6e8; // Zacht paars
-$color-fotos: #e88fa0; // Zacht rood/roze
+$color-dashboard: #e8956a;
+$color-chat: #7cb9e8;
+$color-agenda: #82c596;
+$color-notities: #f0c674;
+$color-boodschappen: #c3a6e8;
+$color-fotos: #e88fa0;
 
 // Primaire kleur (algemeen)
 $color-primary: #e8956a;
@@ -68,3 +68,20 @@ $transition: all 0.2s ease;
 $mobile: 480px;
 $tablet: 768px;
 $desktop: 1024px;
+
+// CSS Custom Properties voor dark mode
+:root {
+    --color-bg: #{$color-bg};
+    --color-surface: #{$color-surface};
+    --color-text: #{$color-text};
+    --color-text-muted: #{$color-text-muted};
+    --color-border: #{$color-border};
+}
+
+html.dark {
+    --color-bg: #{$color-bg-dark};
+    --color-surface: #{$color-surface-dark};
+    --color-text: #{$color-text-dark};
+    --color-text-muted: #6b6b6d;
+    --color-border: #{$color-border-dark};
+}
