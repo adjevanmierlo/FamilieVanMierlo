@@ -2,6 +2,10 @@
     <div class="auth-wrapper">
         <div class="auth-card">
 
+            <div class="auth-icon">
+                <img src="/icons/icon-192.png" alt="Familie Van Mierlo" />
+            </div>
+
             <div class="auth-logo">
                 <a href="/">Familie Van Mierlo</a>
             </div>
