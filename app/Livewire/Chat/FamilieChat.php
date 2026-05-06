@@ -17,11 +17,11 @@ class FamilieChat extends Component
   public ?int $editingId = null;
   public string $editingMessage = '';
 
-  protected $fillable = ['user_id', 'message', 'attachment', 'read_at', 'is_edited', 'deleted_at'];
-
-  public function receiveMessage(): void
+  protected function getListeners(): array
   {
-    $this->dispatch('scroll-to-bottom');
+    return [
+      'echo:familie-chat,MessageSent' => '$refresh',
+    ];
   }
 
   public function sendMessage(): void
@@ -47,7 +47,7 @@ class FamilieChat extends Component
 
     $chatMessage->load('user');
 
-    broadcast(new MessageSent($chatMessage))->toOthers();
+    broadcast(new MessageSent($chatMessage));
 
     $this->message = '';
     $this->attachment = null;
@@ -67,6 +67,9 @@ class FamilieChat extends Component
     $message->message    = '';
     $message->attachment = null;
     $message->save();
+
+    $message->load('user');
+    broadcast(new MessageSent($message));
 
     $this->dispatch('scroll-to-bottom');
   }
@@ -99,6 +102,9 @@ class FamilieChat extends Component
       'message'   => trim($this->editingMessage),
       'is_edited' => true,
     ]);
+
+    $message->load('user');
+    broadcast(new MessageSent($message));
 
     $this->editingId      = null;
     $this->editingMessage = '';
