@@ -53,6 +53,43 @@
             </button>
         </div>
 
+        {{-- Wachtwoord --}}
+        <div class="settings-card">
+            <h2 class="settings-card__title">Wachtwoord wijzigen</h2>
+
+            @if ($passwordSaved)
+                <div class="settings-success">
+                    <x-heroicon-o-check-circle />
+                    Wachtwoord gewijzigd!
+                </div>
+            @endif
+
+            <div class="form-group">
+                <label class="form-label">Huidig wachtwoord</label>
+                <input type="password" wire:model="currentPassword" class="form-input" />
+                @error('currentPassword')
+                    <span class="form-error">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Nieuw wachtwoord</label>
+                <input type="password" wire:model="newPassword" class="form-input" />
+                @error('newPassword')
+                    <span class="form-error">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Bevestig nieuw wachtwoord</label>
+                <input type="password" wire:model="newPasswordConfirmation" class="form-input" />
+            </div>
+
+            <button wire:click="changePassword" class="btn btn--primary">
+                Wachtwoord wijzigen
+            </button>
+        </div>
+
         {{-- Weergave --}}
         <div class="settings-card">
             <h2 class="settings-card__title">Weergave</h2>

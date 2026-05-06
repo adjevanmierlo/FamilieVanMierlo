@@ -3,6 +3,7 @@
 namespace App\Livewire\Settings;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -15,6 +16,11 @@ class ProfileSettings extends Component
   public string $email = '';
   public $avatar = null;
   public bool $saved = false;
+
+  public string $currentPassword = '';
+  public string $newPassword = '';
+  public string $newPasswordConfirmation = '';
+  public bool $passwordSaved = false;
 
   public function mount(): void
   {
@@ -47,6 +53,29 @@ class ProfileSettings extends Component
     $this->saved  = true;
 
     $this->dispatch('profile-saved');
+  }
+
+  public function changePassword(): void
+  {
+    $this->validate([
+      'currentPassword' => 'required',
+      'newPassword'     => 'required|min:8',
+      'newPasswordConfirmation' => 'required|same:newPassword',
+    ]);
+
+    if (!Hash::check($this->currentPassword, Auth::user()->password)) {
+      $this->addError('currentPassword', 'Huidig wachtwoord is onjuist.');
+      return;
+    }
+
+    Auth::user()->update([
+      'password' => Hash::make($this->newPassword),
+    ]);
+
+    $this->currentPassword = '';
+    $this->newPassword = '';
+    $this->newPasswordConfirmation = '';
+    $this->passwordSaved = true;
   }
 
   public function render()
