@@ -48,6 +48,17 @@
                 @enderror
             </div>
 
+            <div class="form-group">
+                <label class="form-label">Mijn kleur in chat</label>
+                <div class="settings-colors">
+                    @foreach ($colorOptions as $c)
+                        <button type="button" wire:click="$set('color', '{{ $c }}')"
+                            class="settings-color {{ $color === $c ? 'settings-color--active' : '' }}"
+                            style="background-color: {{ $c }};"></button>
+                    @endforeach
+                </div>
+            </div>
+
             <button wire:click="save" class="btn btn--primary">
                 Opslaan
             </button>

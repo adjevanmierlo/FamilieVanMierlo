@@ -160,3 +160,28 @@ html.dark .settings-card {
         height: 28px;
     }
 }
+
+.settings-colors {
+    display: flex;
+    gap: $space-sm;
+    flex-wrap: wrap;
+}
+
+.settings-color {
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-full;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: $transition;
+    -webkit-tap-highlight-color: transparent;
+
+    &--active {
+        border-color: var(--color-text);
+        transform: scale(1.2);
+    }
+
+    &:active {
+        transform: scale(0.9);
+    }
+}

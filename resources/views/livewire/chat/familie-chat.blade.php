@@ -14,7 +14,8 @@
     <div class="chat-messages" x-ref="messages">
         @forelse($messages as $msg)
             @php $isOwn = $msg->user_id === auth()->id(); @endphp
-            <div class="chat-message {{ $isOwn ? 'chat-message--own' : '' }}">
+            <div class="chat-message {{ $isOwn ? 'chat-message--own' : '' }}"
+                @if ($isOwn) style="--bubble-color: {{ Auth::user()->color ?? '#7CB9E8' }};" @endif>
                 @if (!$isOwn)
                     <div class="chat-message__avatar">
                         @if ($msg->user->avatar)

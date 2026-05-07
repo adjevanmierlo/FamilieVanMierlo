@@ -22,10 +22,25 @@ class ProfileSettings extends Component
   public string $newPasswordConfirmation = '';
   public bool $passwordSaved = false;
 
+  public string $color = '#7CB9E8';
+  public array $colorOptions = [
+    '#7CB9E8', // Blauw
+    '#82C596', // Groen
+    '#F0C674', // Geel
+    '#C3A6E8', // Paars
+    '#E88FA0', // Roze
+    '#E8956A', // Oranje
+    '#80CBC4', // Turquoise
+    '#FF8A65', // Koraal
+    '#90A4AE', // Grijs blauw
+    '#A5D6A7', // Licht groen
+  ];
+
   public function mount(): void
   {
     $this->name  = Auth::user()->name;
     $this->email = Auth::user()->email;
+    $this->color = Auth::user()->color ?? '#7CB9E8';
   }
 
   public function save(): void
@@ -47,6 +62,7 @@ class ProfileSettings extends Component
 
     $user->name  = $this->name;
     $user->email = $this->email;
+    $user->color = $this->color;
     $user->save();
 
     $this->avatar = null;
