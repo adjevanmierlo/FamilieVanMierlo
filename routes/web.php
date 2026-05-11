@@ -19,35 +19,44 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-
 Route::get('/boodschappen', function () {
+  auth()->user()->unreadNotifications()
+    ->where('data->type', 'boodschappen')
+    ->get()->markAsRead();
   return view('shopping.index');
 })->middleware(['auth'])->name('shopping');
 
-
 Route::get('/notities', function () {
+  auth()->user()->unreadNotifications()
+    ->where('data->type', 'notities')
+    ->get()->markAsRead();
   return view('notes.index');
 })->middleware(['auth'])->name('notes');
 
-
 Route::get('/agenda', function () {
+  auth()->user()->unreadNotifications()
+    ->where('data->type', 'agenda')
+    ->get()->markAsRead();
   return view('agenda.index');
 })->middleware(['auth'])->name('agenda');
 
 Route::get('/fotos', function () {
+  auth()->user()->unreadNotifications()
+    ->where('data->type', 'fotos')
+    ->get()->markAsRead();
   return view('photos.index');
 })->middleware(['auth'])->name('photos');
 
-
 Route::get('/chat', function () {
+  auth()->user()->unreadNotifications()
+    ->where('data->type', 'chat')
+    ->get()->markAsRead();
   return view('chat.index');
 })->middleware(['auth'])->name('chat');
-
 
 Route::get('/instellingen', function () {
   return view('settings.index');
 })->middleware(['auth'])->name('settings');
-
 
 Route::get('/admin/gebruikers', function () {
   if (auth()->user()->role !== 'admin') {

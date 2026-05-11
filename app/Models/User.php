@@ -29,4 +29,17 @@ class User extends Authenticatable
       'password' => 'hashed',
     ];
   }
+
+  /**
+   * Get the count of unread notifications of a specific type.
+   *
+   * @param string $type
+   * @return int
+   */
+  public function unreadNotificationsOfType(string $type): int
+  {
+    return $this->unreadNotifications()
+      ->where('data->type', $type)
+      ->count();
+  }
 }

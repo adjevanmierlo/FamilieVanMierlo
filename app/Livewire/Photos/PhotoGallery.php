@@ -25,6 +25,8 @@ class PhotoGallery extends Component
       'photos.*' => 'image|max:10240',
     ]);
 
+    $uploadedCount = 0;
+
     foreach ($this->photos as $photo) {
       $filename = $photo->store('photos', 'public');
 
@@ -35,7 +37,21 @@ class PhotoGallery extends Component
         'original_name' => $photo->getClientOriginalName(),
         'caption'       => '',
       ]);
+
+      $uploadedCount++;
     }
+
+    // Notificatie toevoegen
+    $albumName = $this->selectedAlbum
+      ? Album::find($this->selectedAlbum)?->name
+      : 'Algemeen';
+
+    \App\Helpers\NotifyFamily::send(
+      'fotos',
+      'Foto\'s',
+      Auth::user()->name . ' voegde ' . $uploadedCount . ' ' . ($uploadedCount === 1 ? 'foto' : 'foto\'s') . ' toe aan ' . $albumName,
+      '/fotos'
+    );
 
     $this->photos = [];
     $this->uploading = false;
@@ -57,6 +73,14 @@ class PhotoGallery extends Component
     Storage::disk('public')->delete($photo->filename);
     $photo->delete();
     $this->selectedPhoto = null;
+
+    // Notificatie voor verwijderen (optioneel)
+    \App\Helpers\NotifyFamily::send(
+      'fotos',
+      'Foto\'s',
+      Auth::user()->name . ' verwijderde een foto',
+      '/fotos'
+    );
   }
 
   public function render()

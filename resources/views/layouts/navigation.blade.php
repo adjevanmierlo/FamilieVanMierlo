@@ -17,35 +17,61 @@
             <li>
                 <a href="{{ route('chat') }}"
                     class="nav-link {{ request()->routeIs('chat') ? 'nav-link--active' : '' }}">
-                    <x-heroicon-o-chat-bubble-left-right class="nav-icon" />
+                    <div class="nav-link__icon-wrapper">
+                        <x-heroicon-o-chat-bubble-left-right class="nav-icon" />
+                        @if (Auth::user()->unreadNotificationsOfType('chat') > 0)
+                            <span class="nav-badge">{{ Auth::user()->unreadNotificationsOfType('chat') }}</span>
+                        @endif
+                    </div>
                     <span>Chat</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('agenda') }}"
                     class="nav-link {{ request()->routeIs('agenda') ? 'nav-link--active' : '' }}">
-                    <x-heroicon-o-calendar-days class="nav-icon" />
+                    <div class="nav-link__icon-wrapper">
+                        <x-heroicon-o-calendar-days class="nav-icon" />
+                        @if (Auth::user()->unreadNotificationsOfType('agenda') > 0)
+                            <span class="nav-badge">{{ Auth::user()->unreadNotificationsOfType('agenda') }}</span>
+                        @endif
+                    </div>
                     <span>Agenda</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('notes') }}"
                     class="nav-link {{ request()->routeIs('notes') ? 'nav-link--active' : '' }}">
-                    <x-heroicon-o-document-text class="nav-icon" />
+                    <div class="nav-link__icon-wrapper">
+                        <x-heroicon-o-document-text class="nav-icon" />
+                        @if (Auth::user()->unreadNotificationsOfType('notities') > 0)
+                            <span class="nav-badge">{{ Auth::user()->unreadNotificationsOfType('notities') }}</span>
+                        @endif
+                    </div>
                     <span>Notities</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('shopping') }}"
                     class="nav-link {{ request()->routeIs('shopping') ? 'nav-link--active' : '' }}">
-                    <x-heroicon-o-shopping-cart class="nav-icon" />
+                    <div class="nav-link__icon-wrapper">
+                        <x-heroicon-o-shopping-cart class="nav-icon" />
+                        @if (Auth::user()->unreadNotificationsOfType('boodschappen') > 0)
+                            <span
+                                class="nav-badge">{{ Auth::user()->unreadNotificationsOfType('boodschappen') }}</span>
+                        @endif
+                    </div>
                     <span>Boodschappen</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('photos') }}"
                     class="nav-link {{ request()->routeIs('photos') ? 'nav-link--active' : '' }}">
-                    <x-heroicon-o-photo class="nav-icon" />
+                    <div class="nav-link__icon-wrapper">
+                        <x-heroicon-o-photo class="nav-icon" />
+                        @if (Auth::user()->unreadNotificationsOfType('fotos') > 0)
+                            <span class="nav-badge">{{ Auth::user()->unreadNotificationsOfType('fotos') }}</span>
+                        @endif
+                    </div>
                     <span>Foto's</span>
                 </a>
             </li>
@@ -72,6 +98,7 @@
                 </button>
             </form>
         </div>
+
     </aside>
 
     {{-- Mobile bottom navigation --}}
@@ -96,10 +123,6 @@
             <x-heroicon-o-shopping-cart class="nav-icon" />
             <span>Boodschappen</span>
         </a>
-        <button class="nav-bottom-item" @click="moreOpen = !moreOpen">
-            <x-heroicon-o-squares-2x2 class="nav-icon" />
-            <span>Meer</span>
-        </button>
 
         {{-- Meer menu sheet --}}
         <div class="nav-more-sheet" x-show="moreOpen" @click.outside="moreOpen = false" x-transition>
@@ -150,6 +173,11 @@
                 </form>
             </div>
         </div>
+
+        <button class="nav-bottom-item" @click="moreOpen = !moreOpen">
+            <x-heroicon-o-squares-2x2 class="nav-icon" />
+            <span>Meer</span>
+        </button>
     </nav>
 
 </nav>

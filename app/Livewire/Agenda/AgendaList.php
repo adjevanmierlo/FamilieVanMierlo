@@ -97,6 +97,14 @@ class AgendaList extends Component
       $this->selectedEvent = Event::create($data);
     }
 
+    // Notificatie toevoegen
+    \App\Helpers\NotifyFamily::send(
+      'agenda',
+      'Agenda',
+      Auth::user()->name . ' ' . ($this->selectedEvent ? 'bewerkte' : 'maakte') . ': ' . $this->title,
+      '/agenda'
+    );
+
     $this->editing = false;
   }
 

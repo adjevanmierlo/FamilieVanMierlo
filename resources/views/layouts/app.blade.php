@@ -29,6 +29,23 @@ if (theme === 'dark') document.documentElement.classList.add('dark');">
             {{ $slot }}
         </main>
     </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            if (window.Echo) {
+                window.Echo.private('App.Models.User.{{ Auth::id() }}')
+                    .notification((notification) => {
+                        // Refresh de navigatie badge door de pagina te herladen
+                        // alleen als we niet in de chat zijn
+                        const currentPath = window.location.pathname;
+                        if (currentPath !== notification.url) {
+                            window.location.reload();
+                        }
+                    });
+            }
+        });
+    </script>
+
     @livewireScripts
 </body>
 

@@ -49,6 +49,14 @@ class FamilieChat extends Component
 
     broadcast(new MessageSent($chatMessage));
 
+    // Notificatie toevoegen
+    \App\Helpers\NotifyFamily::send(
+      'chat',
+      Auth::user()->name,
+      trim($this->message) ?: 'Stuurde een foto',
+      '/chat'
+    );
+
     $this->message = '';
     $this->attachment = null;
 
@@ -70,6 +78,14 @@ class FamilieChat extends Component
 
     $message->load('user');
     broadcast(new MessageSent($message));
+
+    // Notificatie toevoegen bij verwijderen
+    \App\Helpers\NotifyFamily::send(
+      'chat',
+      Auth::user()->name,
+      'Verwijderde een bericht',
+      '/chat'
+    );
 
     $this->dispatch('scroll-to-bottom');
   }
@@ -105,6 +121,14 @@ class FamilieChat extends Component
 
     $message->load('user');
     broadcast(new MessageSent($message));
+
+    // Notificatie toevoegen bij bewerken
+    \App\Helpers\NotifyFamily::send(
+      'chat',
+      Auth::user()->name,
+      'Bewerkte een bericht',
+      '/chat'
+    );
 
     $this->editingId      = null;
     $this->editingMessage = '';

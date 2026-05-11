@@ -54,6 +54,14 @@ class NotesList extends Component
       ]);
     }
 
+    // Notificatie toevoegen
+    \App\Helpers\NotifyFamily::send(
+      'notities',
+      'Nieuwe notitie',
+      Auth::user()->name . ' ' . ($this->selectedNote ? 'bewerkte' : 'maakte') . ' een notitie',
+      '/notities'
+    );
+
     $this->editing = false;
   }
 

@@ -39,6 +39,14 @@ class ShoppingList extends Component
       'user_id'          => Auth::id(),
     ]);
 
+    // Notificatie toevoegen
+    \App\Helpers\NotifyFamily::send(
+      'shopping',
+      Auth::user()->name,
+      "voegde toe: {$this->newItem}" . ($this->newCategory ? " ({$this->newCategory})" : ''),
+      '/shopping'
+    );
+
     $this->newItem = '';
     $this->newCategory = '';
     $this->list->refresh()->load('items');

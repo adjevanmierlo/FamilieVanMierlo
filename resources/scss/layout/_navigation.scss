@@ -124,6 +124,29 @@ html.dark .nav-sidebar {
     }
 }
 
+.nav-link__icon-wrapper {
+    position: relative;
+    display: inline-flex;
+}
+
+.nav-badge {
+    position: absolute;
+    top: -4px;
+    right: -6px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 3px;
+    border-radius: $radius-full;
+    background-color: #e57373;
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
 .nav-icon {
     width: 20px;
     height: 20px;
@@ -296,6 +319,11 @@ html.dark .nav-more-sheet {
         &--fotos {
             background-color: rgba($color-fotos, 0.15);
             color: $color-fotos;
+        }
+
+        &--meldingen {
+            background-color: rgba($color-notities, 0.15);
+            color: $color-notities;
         }
 
         &--instellingen {
