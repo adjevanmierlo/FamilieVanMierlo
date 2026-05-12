@@ -4,6 +4,7 @@ namespace App\Livewire\Chat;
 
 use App\Events\MessageSent;
 use App\Models\ChatMessage;
+use App\Models\ChatMessageRead;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -142,12 +143,37 @@ class FamilieChat extends Component
 
   public function render()
   {
-    $messages = ChatMessage::with('user')
+    $messages = ChatMessage::with(['user', 'reads.user'])
       ->latest()
       ->take(50)
       ->get()
       ->reverse()
       ->values();
+
+    // Markeer alle berichten als gelezen en broadcast
+    $unread = ChatMessage::whereDoesntHave('reads', function ($q) {
+      $q->where('user_id', Auth::id());
+    })->get();
+
+    foreach ($unread as $message) {
+      $isNew = !ChatMessageRead::where([
+        'chat_message_id' => $message->id,
+        'user_id'         => Auth::id(),
+      ])->exists();
+
+      ChatMessageRead::firstOrCreate([
+        'chat_message_id' => $message->id,
+        'user_id'         => Auth::id(),
+      ], [
+        'read_at' => now(),
+      ]);
+
+      // Broadcast dat dit bericht gelezen is
+      if ($isNew) {
+        $message->load('user');
+        broadcast(new MessageSent($message));
+      }
+    }
 
     return view('livewire.chat.familie-chat', compact('messages'));
   }

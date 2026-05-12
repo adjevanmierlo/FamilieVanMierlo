@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ChatMessage extends Model
 {
@@ -23,5 +24,15 @@ class ChatMessage extends Model
   public function isDeleted(): bool
   {
     return $this->deleted_at !== null;
+  }
+
+  public function reads(): HasMany
+  {
+    return $this->hasMany(ChatMessageRead::class);
+  }
+
+  public function isReadBy(int $userId): bool
+  {
+    return $this->reads->where('user_id', $userId)->isNotEmpty();
   }
 }

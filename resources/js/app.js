@@ -1,3 +1,4 @@
+cat > (resources / js / app.js) << "EOF";
 import "../scss/app.scss";
 import Echo from "laravel-echo";
 import Pusher from "pusher-js";
@@ -35,10 +36,18 @@ async function subscribeToPush() {
 
     const registration = await navigator.serviceWorker.ready;
 
-    const response = await fetch("/push/vapid-public-key");
-    const { key } = await response.json();
-
     try {
+        const response = await fetch("/push/vapid-public-key", {
+            headers: {
+                Accept: "application/json",
+                "X-Requested-With": "XMLHttpRequest",
+            },
+        });
+
+        if (!response.ok) return;
+
+        const { key } = await response.json();
+
         const subscription = await registration.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: urlBase64ToUint8Array(key),
@@ -51,6 +60,7 @@ async function subscribeToPush() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
                 "X-CSRF-TOKEN": document.querySelector(
                     'meta[name="csrf-token"]',
                 )?.content,
@@ -76,7 +86,11 @@ async function subscribeToPush() {
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
         navigator.serviceWorker.register("/sw.js").then(() => {
-            subscribeToPush();
+            const csrfToken = document.querySelector('meta[name="csrf-token"]');
+            if (csrfToken) {
+                subscribeToPush();
+            }
         });
     });
 }
+EOF;

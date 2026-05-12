@@ -19,21 +19,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-// Web Push routes
-Route::get('/push/vapid-public-key', function () {
-  return response()->json(['key' => config('webpush.vapid.public_key')]);
-})->middleware(['auth'])->name('push.vapid-key');
-
-Route::post('/push/subscribe', function (\Illuminate\Http\Request $request) {
-  $request->user()->updatePushSubscription(
-    $request->endpoint,
-    $request->public_key,
-    $request->auth_token,
-    $request->content_encoding
-  );
-  return response()->json(['success' => true]);
-})->middleware(['auth'])->name('push.subscribe');
-
+// Overige routes (moeten na de auth routes komen)
 Route::get('/boodschappen', function () {
   auth()->user()->unreadNotifications()
     ->where('data->type', 'boodschappen')
@@ -79,3 +65,18 @@ Route::get('/admin/gebruikers', function () {
   }
   return view('admin.users');
 })->middleware(['auth'])->name('admin.users');
+
+// Web Push routes - na alle andere routes, met auth middleware
+Route::get('/push/vapid-public-key', function () {
+  return response()->json(['key' => config('webpush.vapid.public_key')]);
+})->middleware(['auth'])->name('push.vapid-key');
+
+Route::post('/push/subscribe', function (\Illuminate\Http\Request $request) {
+  $request->user()->updatePushSubscription(
+    $request->endpoint,
+    $request->public_key,
+    $request->auth_token,
+    $request->content_encoding
+  );
+  return response()->json(['success' => true]);
+})->middleware(['auth'])->name('push.subscribe');

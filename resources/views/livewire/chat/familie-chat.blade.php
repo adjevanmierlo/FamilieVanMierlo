@@ -15,22 +15,26 @@
         @forelse($messages as $msg)
             @php $isOwn = $msg->user_id === auth()->id(); @endphp
             <div class="chat-message {{ $isOwn ? 'chat-message--own' : '' }}"
-                @if ($isOwn) style="--bubble-color: {{ Auth::user()->color ?? '#7CB9E8' }};" @endif>
-                @if (!$isOwn)
+                @if($isOwn) style="--bubble-color: {{ Auth::user()->color ?? '#7CB9E8' }};" @endif>
+
+                @if(!$isOwn)
                     <div class="chat-message__avatar">
-                        @if ($msg->user->avatar)
+                        @if($msg->user->avatar)
                             <img src="{{ Storage::url($msg->user->avatar) }}" alt="{{ $msg->user->name }}" />
                         @else
                             <span>{{ substr($msg->user->name, 0, 1) }}</span>
                         @endif
                     </div>
                 @endif
+
                 <div class="chat-message__content">
-                    @if (!$isOwn)
-                        <span class="chat-message__name">{{ $msg->user->name }}</span>
+                    @if(!$isOwn)
+                        <span class="chat-message__name" style="color: {{ $msg->user->color ?? '#7CB9E8' }};">
+                            {{ $msg->user->name }}
+                        </span>
                     @endif
 
-                    @if ($msg->isDeleted())
+                    @if($msg->isDeleted())
                         <div class="chat-message__bubble chat-message__bubble--deleted">
                             <x-heroicon-o-no-symbol class="chat-message__deleted-icon" />
                             Dit bericht is verwijderd
@@ -45,32 +49,56 @@
                             </div>
                         </div>
                     @else
-                        @if ($msg->attachment)
+                        @if($msg->attachment)
                             <img src="{{ Storage::url($msg->attachment) }}" alt="Bijlage"
                                 class="chat-message__attachment" />
                         @endif
-                        @if ($msg->message)
-                            <div class="chat-message__bubble">{{ $msg->message }}</div>
-                        @endif
-                        @if ($isOwn && !$msg->isDeleted())
-                            <div class="chat-message__actions">
-                                <button wire:click="startEdit({{ $msg->id }})" class="chat-message__action">
-                                    <x-heroicon-o-pencil-square />
-                                </button>
-                                <button wire:click="deleteMessage({{ $msg->id }})"
-                                    class="chat-message__action chat-message__action--delete">
-                                    <x-heroicon-o-trash />
-                                </button>
+                        @if($msg->message)
+                            <div class="chat-message__bubble-wrapper"
+                                x-data="{ showMenu: false, touchTimer: null }"
+                                @contextmenu.prevent="showMenu = true"
+                                @touchstart="touchTimer = setTimeout(() => showMenu = true, 500)"
+                                @touchend="clearTimeout(touchTimer)"
+                                @touchmove="clearTimeout(touchTimer)">
+
+                                <div class="chat-message__bubble" @click.away="showMenu = false">
+                                    {{ $msg->message }}
+                                    <div class="chat-message__bubble-meta">
+                                        <span class="chat-message__time">{{ $msg->created_at->format('H:i') }}</span>
+                                        @if($msg->is_edited && !$msg->isDeleted())
+                                            <span class="chat-message__edited">bewerkt</span>
+                                        @endif
+                                        @if($isOwn && !$msg->isDeleted())
+                                            <div class="chat-message__reads">
+                                                @foreach($msg->reads->where('user_id', '!=', Auth::id()) as $read)
+                                                    <div class="chat-message__read-avatar" title="{{ $read->user->name }}">
+                                                        @if($read->user->avatar)
+                                                            <img src="{{ Storage::url($read->user->avatar) }}" alt="{{ $read->user->name }}" />
+                                                        @else
+                                                            <span>{{ substr($read->user->name, 0, 1) }}</span>
+                                                        @endif
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                @if($isOwn && !$msg->isDeleted())
+                                    <div class="chat-context-menu" x-show="showMenu" x-transition @click.outside="showMenu = false">
+                                        <button wire:click="startEdit({{ $msg->id }})" @click="showMenu = false" class="chat-context-menu__item">
+                                            <x-heroicon-o-pencil-square />
+                                            <span>Bewerken</span>
+                                        </button>
+                                        <button wire:click="deleteMessage({{ $msg->id }})" @click="showMenu = false" class="chat-context-menu__item chat-context-menu__item--danger">
+                                            <x-heroicon-o-trash />
+                                            <span>Verwijderen</span>
+                                        </button>
+                                    </div>
+                                @endif
                             </div>
                         @endif
                     @endif
-
-                    <div class="chat-message__meta">
-                        <span class="chat-message__time">{{ $msg->created_at->format('H:i') }}</span>
-                        @if ($msg->is_edited && !$msg->isDeleted())
-                            <span class="chat-message__edited">bewerkt</span>
-                        @endif
-                    </div>
                 </div>
             </div>
         @empty
@@ -81,7 +109,7 @@
     </div>
 
     <div class="chat-input">
-        @if ($attachment)
+        @if($attachment)
             <div class="chat-input__preview">
                 <span>📎 Bijlage geselecteerd</span>
                 <button wire:click="$set('attachment', null)" class="chat-input__remove">
@@ -94,8 +122,8 @@
                 <input type="file" wire:model="attachment" accept="image/*" class="hidden" />
                 <x-heroicon-o-paper-clip />
             </label>
-            <input type="text" wire:model="message" wire:keydown.enter="sendMessage" placeholder="Typ een bericht..."
-                class="chat-input__field" />
+            <input type="text" wire:model="message" wire:keydown.enter="sendMessage"
+                placeholder="Typ een bericht..." class="chat-input__field" />
             <button wire:click="sendMessage" class="chat-input__send">
                 <x-heroicon-o-paper-airplane />
             </button>
