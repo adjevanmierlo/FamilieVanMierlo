@@ -14,8 +14,69 @@ window.Echo = new Echo({
     enabledTransports: ["ws", "wss"],
 });
 
+function urlBase64ToUint8Array(base64String) {
+    const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+    const base64 = (base64String + padding)
+        .replace(/-/g, "+")
+        .replace(/_/g, "/");
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}
+
+async function subscribeToPush() {
+    if (!("serviceWorker" in navigator) || !("PushManager" in window)) return;
+
+    const permission = await Notification.requestPermission();
+    if (permission !== "granted") return;
+
+    const registration = await navigator.serviceWorker.ready;
+
+    const response = await fetch("/push/vapid-public-key");
+    const { key } = await response.json();
+
+    try {
+        const subscription = await registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(key),
+        });
+
+        const p256dh = subscription.getKey("p256dh");
+        const auth = subscription.getKey("auth");
+
+        await fetch("/push/subscribe", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector(
+                    'meta[name="csrf-token"]',
+                )?.content,
+            },
+            body: JSON.stringify({
+                endpoint: subscription.endpoint,
+                public_key: p256dh
+                    ? btoa(String.fromCharCode(...new Uint8Array(p256dh)))
+                    : null,
+                auth_token: auth
+                    ? btoa(String.fromCharCode(...new Uint8Array(auth)))
+                    : null,
+                content_encoding: (PushManager.supportedContentEncodings || [
+                    "aesgcm",
+                ])[0],
+            }),
+        });
+    } catch (e) {
+        console.log("Push subscription mislukt:", e);
+    }
+}
+
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/sw.js");
+        navigator.serviceWorker.register("/sw.js").then(() => {
+            subscribeToPush();
+        });
     });
 }

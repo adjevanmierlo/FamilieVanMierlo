@@ -6,6 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\BroadcastMessage;
+use NotificationChannels\WebPush\WebPushMessage;
+use NotificationChannels\WebPush\WebPushChannel;
 
 class FamilieNotification extends Notification implements ShouldBroadcast
 {
@@ -20,7 +22,7 @@ class FamilieNotification extends Notification implements ShouldBroadcast
 
   public function via(object $notifiable): array
   {
-    return ['database', 'broadcast'];
+    return ['database', 'broadcast', WebPushChannel::class];
   }
 
   public function toArray(object $notifiable): array
@@ -41,5 +43,15 @@ class FamilieNotification extends Notification implements ShouldBroadcast
       'body'  => $this->body,
       'url'   => $this->url,
     ]);
+  }
+
+  public function toWebPush(object $notifiable, object $notification): WebPushMessage
+  {
+    return (new WebPushMessage)
+      ->title($this->title)
+      ->body($this->body)
+      ->icon('/icons/icon-192.png')
+      ->action('Bekijken', $this->url)
+      ->data(['url' => $this->url]);
   }
 }

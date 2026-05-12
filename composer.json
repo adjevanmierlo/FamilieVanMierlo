@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.3",
         "blade-ui-kit/blade-heroicons": "^2.7",
+        "laravel-notification-channels/webpush": "^10.5",
         "laravel/framework": "^13.0",
         "laravel/reverb": "^1.0",
         "laravel/tinker": "^3.0",
