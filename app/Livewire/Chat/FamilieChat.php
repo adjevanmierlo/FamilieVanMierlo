@@ -5,6 +5,7 @@ namespace App\Livewire\Chat;
 use App\Events\MessageSent;
 use App\Models\ChatMessage;
 use App\Models\ChatMessageRead;
+use App\Models\Photo;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -38,6 +39,15 @@ class FamilieChat extends Component
         'attachment' => 'file|max:10240|mimes:jpg,jpeg,png,gif,webp',
       ]);
       $attachmentPath = $this->attachment->store('chat-attachments', 'public');
+
+      // Automatisch opslaan in fotoboek
+      \App\Models\Photo::create([
+        'user_id'       => Auth::id(),
+        'album_id'      => null,
+        'filename'      => $attachmentPath,
+        'original_name' => $this->attachment->getClientOriginalName(),
+        'caption'       => 'Gedeeld via chat',
+      ]);
     }
 
     $chatMessage = ChatMessage::create([
