@@ -1,4 +1,3 @@
-cat > (resources / js / app.js) << "EOF";
 import "../scss/app.scss";
 import Echo from "laravel-echo";
 import Pusher from "pusher-js";
@@ -93,4 +92,3 @@ if ("serviceWorker" in navigator) {
         });
     });
 }
-EOF;

@@ -150,6 +150,7 @@ html.dark .chat-messages {
     }
 
     &__avatar {
+        position: relative;
         width: 32px;
         height: 32px;
         border-radius: $radius-full;
@@ -168,6 +169,18 @@ html.dark .chat-messages {
             height: 100%;
             object-fit: cover;
         }
+    }
+
+    &__online-dot {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 10px;
+        height: 10px;
+        border-radius: $radius-full;
+        background-color: $color-agenda;
+        border: 2px solid white;
+        z-index: 1;
     }
 
     &__content {
@@ -353,6 +366,11 @@ html.dark .chat-messages {
     }
 }
 
+.chat-online {
+    color: $color-agenda;
+    font-weight: 600;
+}
+
 .chat-context-menu {
     position: absolute;
     bottom: calc(100% + 4px);
@@ -418,6 +436,10 @@ html.dark .chat-message__bubble:not(.chat-message__bubble--deleted) {
     );
     border-color: rgba(255, 255, 255, 0.08);
     color: var(--color-text);
+}
+
+html.dark .chat-message__online-dot {
+    border-color: #2c2c2e;
 }
 
 .chat-empty {

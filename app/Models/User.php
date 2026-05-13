@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use NotificationChannels\WebPush\HasPushSubscriptions;
 
-#[Fillable(['name', 'email', 'password', 'avatar', 'role', 'color'])]
+#[Fillable(['name', 'email', 'password', 'avatar', 'role', 'color', 'last_seen_at'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -28,6 +28,7 @@ class User extends Authenticatable
     return [
       'email_verified_at' => 'datetime',
       'password' => 'hashed',
+      'last_seen_at' => 'datetime',
     ];
   }
 
@@ -42,5 +43,15 @@ class User extends Authenticatable
     return $this->unreadNotifications()
       ->where('data->type', $type)
       ->count();
+  }
+
+  /**
+   * Check if the user is online based on last_seen_at.
+   *
+   * @return bool
+   */
+  public function isOnline(): bool
+  {
+    return $this->last_seen_at && $this->last_seen_at->gt(now()->subMinutes(2));
   }
 }
