@@ -93,6 +93,8 @@ class PhotoGallery extends Component
 
     $allPhotos = $photosQuery->get();
 
-    return view('livewire.photos.photo-gallery', compact('albums', 'allPhotos'));
+    $groupedPhotos = $allPhotos->groupBy(fn($photo) => $photo->created_at->locale('nl')->isoFormat('D MMMM YYYY'));
+
+    return view('livewire.photos.photo-gallery', compact('albums', 'allPhotos', 'groupedPhotos'));
   }
 }

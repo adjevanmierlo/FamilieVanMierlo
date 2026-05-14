@@ -15,7 +15,7 @@
 .photos-title {
     font-size: $font-size-xl;
     font-weight: 700;
-    color: $color-text;
+    color: var(--color-text);
 }
 
 .photos-upload {
@@ -61,7 +61,6 @@
         width: 48px;
         height: 48px;
     }
-
     &__actions {
         display: flex;
         gap: $space-sm;
@@ -78,11 +77,11 @@
 .photos-album-btn {
     padding: $space-xs $space-md;
     border-radius: $radius-full;
-    border: 1px solid $color-border;
+    border: 1px solid var(--color-border);
     background: none;
     font-size: $font-size-sm;
     font-weight: 500;
-    color: $color-text-muted;
+    color: var(--color-text-muted);
     cursor: pointer;
     transition: $transition;
     font-family: $font-family;
@@ -99,14 +98,28 @@
     }
 }
 
+.photos-group {
+    margin-bottom: $space-xl;
+
+    &__date {
+        font-size: $font-size-sm;
+        font-weight: 600;
+        color: var(--color-text-muted);
+        margin-bottom: $space-sm;
+        padding-bottom: $space-xs;
+        border-bottom: 1px solid var(--color-border);
+        text-transform: capitalize;
+    }
+}
+
 .photos-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: $space-sm;
+    gap: $space-xs;
 
     @media (min-width: $tablet) {
         grid-template-columns: repeat(4, 1fr);
-        gap: $space-md;
+        gap: $space-sm;
     }
 
     @media (min-width: $desktop) {
@@ -122,6 +135,7 @@
     transition: $transition;
     box-shadow: $shadow-sm;
     -webkit-tap-highlight-color: transparent;
+    position: relative;
 
     img {
         width: 100%;
@@ -129,6 +143,25 @@
         object-fit: cover;
         display: block;
         transition: $transition;
+    }
+
+    &__overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: $space-xs $space-sm;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+        opacity: 0;
+        transition: $transition;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    &__author {
+        font-size: 10px;
+        color: white;
+        font-weight: 600;
     }
 
     &:active {
@@ -140,17 +173,19 @@
         &:hover img {
             transform: scale(1.05);
         }
+        &:hover &__overlay {
+            opacity: 1;
+        }
     }
 }
 
-.photos-empty {
-    grid-column: 1 / -1;
+.photos-empty-state {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: $space-md;
     padding: $space-2xl;
-    color: $color-text-muted;
+    color: var(--color-text-muted);
 
     &__icon {
         width: 48px;
@@ -166,7 +201,7 @@
 .photos-modal {
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.9);
     z-index: 200;
     display: flex;
     align-items: center;
@@ -186,6 +221,7 @@
             max-height: 75vh;
             border-radius: $radius-md;
             object-fit: contain;
+            box-shadow: $shadow-lg;
         }
     }
 
@@ -198,6 +234,7 @@
         color: white;
         cursor: pointer;
         padding: $space-xs;
+        -webkit-tap-highlight-color: transparent;
 
         svg {
             width: 24px;
@@ -210,17 +247,53 @@
         align-items: center;
         gap: $space-md;
         padding: $space-sm;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: $radius-md;
+        backdrop-filter: blur(8px);
+    }
+
+    &__avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: $radius-full;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: $font-size-sm;
+        font-weight: 700;
+        flex-shrink: 0;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__meta {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
     }
 
     &__author {
         font-size: $font-size-sm;
-        color: rgba(255, 255, 255, 0.8);
+        color: white;
         font-weight: 600;
     }
 
     &__date {
-        font-size: $font-size-sm;
+        font-size: 11px;
         color: rgba(255, 255, 255, 0.6);
-        flex: 1;
+    }
+
+    &__caption {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.8);
+        font-style: italic;
     }
 }
